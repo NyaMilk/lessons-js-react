@@ -1,82 +1,98 @@
+.searchbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.searchbar__groups {
+  display: flex;
+  gap: 1rem;
+}
+
+.searchbar__group {
+  width: 20rem;
+}
+
 .filters {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .filter {
-    display: flex;
-    align-items: flex-end;
-    gap: 1rem;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    background-color: var(--color-day-white-blue);
-    position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-day-white-blue);
+  position: relative;
 }
 
 .filter__modal {
-    position: absolute;
-    top: 4.75rem;
-    left: 22rem;
+  position: absolute;
+  top: 4.75rem;
+  left: 22rem;
 }
 
 .filter__title {
-    display: block;
-    margin-bottom: 0.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
 .filter_date {
-    width: 18rem;
-    display: flex;
-    flex-direction: column;
+  width: 18rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .filter__groups {
-    display: flex;
-    gap: 0.25rem;
+  display: flex;
+  gap: 0.25rem;
 }
 
 .filter__group {
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: 8.875rem;
-    height: 2rem;
-    border-radius: 0.25rem;
-    background-color: var(--color-day-white);
-    border: 0.0625rem solid var(--color-blue);
-    box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 8.875rem;
+  height: 2rem;
+  border-radius: 0.25rem;
+  background-color: var(--color-day-white);
+  border: 0.0625rem solid var(--color-blue);
+  box-sizing: border-box;
 }
 
 .filter__input {
-    width: 100%;
-    height: 100%;
-    padding: 0.5rem 2rem 0.5rem 0.5rem;
-    border: none;
-    box-sizing: border-box;
-    background-color: transparent;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  border: none;
+  box-sizing: border-box;
+  background-color: transparent;
 }
 
 .filter__input::placeholder {
-    color: var(--color-day-light-blue);
+  color: var(--color-day-light-blue);
 }
 
 .filter__prefix {
-    padding-left: 0.5rem;
+  padding-left: 0.5rem;
 }
 
 .filter__button {
-    position: absolute;
-    right: 0.25rem;
+  position: absolute;
+  right: 0.25rem;
 }
 
 .filter__button .filter__icon {
-    stroke: var(--color-day-light-blue);
-    fill: var(--color-day-light-blue);
+  stroke: var(--color-day-light-blue);
+  fill: var(--color-day-light-blue);
 }
 
 .filter__group_status {
-    width: 12rem;
+  width: 12rem;
 }
 
 .filter__input_status {
-    padding-left: 0.5rem;
+  padding-left: 0.5rem;
 }
