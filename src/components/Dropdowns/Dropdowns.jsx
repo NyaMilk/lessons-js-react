@@ -16,7 +16,7 @@ export const DropdownMultiple = ({
         return (
           <InputCheckbox
             key={item}
-            className='custom-dropdown__item'
+            className="custom-dropdown__item"
             text={text}
             disabled={disabled}
             onChange={onChange}
@@ -34,7 +34,7 @@ export const DropdownSingle = ({ list, className = "", disabled }) => {
         return (
           <InputRadio
             key={item}
-            className='custom-dropdown__item'
+            className="custom-dropdown__item"
             text={text}
             disabled={disabled}
           />
@@ -46,17 +46,17 @@ export const DropdownSingle = ({ list, className = "", disabled }) => {
 
 export const DropdownSwitcher = () => {
   return (
-    <div className='custom-dropdown custom-dropdown_switcher'>
+    <div className="custom-dropdown custom-dropdown_switcher">
       Выберите тему
       <Button
-        className='button_size_small button_transparent'
-        icon={<SunIcon className='button__icon' />}
-        text='Светлая'
+        className="button_size_small button_transparent"
+        icon={<SunIcon className="button__icon" />}
+        text="Светлая"
       />
       <Button
-        className='button_size_small button_color_primary'
-        icon={<MoonIcon className='button__icon' />}
-        text='Темная'
+        className="button_size_small button_color_primary"
+        icon={<MoonIcon className="button__icon" />}
+        text="Темная"
       />
     </div>
   );

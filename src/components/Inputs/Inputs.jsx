@@ -7,15 +7,15 @@ export const InputCheckbox = ({ className = "", text, disabled, onChange }) => {
 
   return (
     <div className={`custom-checkbox ${className}`}>
-      <label className='custom-checkbox__label'>
+      <label className="custom-checkbox__label">
         <input
           className={`custom-checkbox__input ${classInput}`}
-          type='checkbox'
+          type="checkbox"
           name={text}
           onChange={onChange}
         />
         <CheckmarkIcon className={`custom-checkbox__icon ${classInput}`} />
-        {text && <span className='custom-checkbox__text'>{text}</span>}
+        {text && <span className="custom-checkbox__text">{text}</span>}
       </label>
     </div>
   );
@@ -32,14 +32,14 @@ export const InputRadio = ({
 
   return (
     <div className={`custom-radio ${className}`}>
-      <label className='custom-radio__label'>
+      <label className="custom-radio__label">
         <input
           className={`custom-radio__input ${classInput}`}
-          type='radio'
+          type="radio"
           name={name}
           onChange={onChange}
         />
-        {text && <span className='custom-radio__text'>{text}</span>}
+        {text && <span className="custom-radio__text">{text}</span>}
       </label>
     </div>
   );
@@ -56,9 +56,9 @@ export const InputSimple = ({
 }) => {
   return (
     <div className={`custom-input ${className}`}>
-      <label className='custom-input__label'>
+      <label className="custom-input__label">
         <input
-          className='custom-input__input'
+          className="custom-input__input"
           type={type}
           name={name}
           placeholder={placeholder}
@@ -79,7 +79,7 @@ export const InputDropdown = ({
   button,
 }) => {
   return (
-    <div className='custom-input'>
+    <div className="custom-input">
       <input
         className={`custom-input__input ${className}`}
         type={type}
@@ -102,7 +102,7 @@ export const InputSearchbar = ({
   button,
 }) => {
   return (
-    <div className='custom-searchbar'>
+    <div className="custom-searchbar">
       <input
         className={`custom-searchbar__input ${className}`}
         type={type}
@@ -128,8 +128,8 @@ export const InputFilter = ({
   button,
 }) => {
   return (
-    <div className='custom-filter'>
-      <span className='custom-filter__prefix'>{prefix}</span>
+    <div className="custom-filter">
+      <span className="custom-filter__prefix">{prefix}</span>
       <input
         className={`custom-filter__input ${className}`}
         type={type}
