@@ -1,0 +1,59 @@
+.searchbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.searchbar__group {
+  display: flex;
+  gap: 1rem;
+}
+
+.searchbar__group > div {
+  width: 20rem;
+}
+
+.search-filter {
+  margin-bottom: 2rem;
+}
+
+.filterbar {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-day-white-blue);
+  position: relative;
+}
+
+.filter {
+  width: 18rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter__title {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.filter__group {
+  display: flex;
+  gap: 0.25rem;
+}
+
+/*.filter__group_status {*/
+/*  width: 12rem;*/
+/*}*/
+
+/*.filter__input_status {*/
+/*  padding-left: 0.5rem;*/
+/*}*/
+
+.filter__modal {
+  position: absolute;
+  top: 4.75rem;
+  left: 22rem;
+}

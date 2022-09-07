@@ -3,13 +3,13 @@ import "./App.css";
 import { Button } from "./components/Button/Button";
 import Header from "./components/Header/Header";
 import { SunIcon, AbortIcon } from "./components/Icons/Icons";
-import Filter from "./components/Filter/Filter";
+import SearchFilter from "./components/SearchFilter/SearchFilter";
 
 function App() {
   return (
     <div className="wrap">
       <Header />
-      <Filter />
+      <SearchFilter />
       <Button
         className="button_size_middle button_color_primary"
         icon={<AbortIcon className="button__icon" />}

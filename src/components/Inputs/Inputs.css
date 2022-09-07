@@ -99,3 +99,43 @@
   fill: var(--color-day-black);
   stroke: var(--color-day-black);
 }
+
+/* custom-filter */
+.custom-filter {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 8.875rem;
+  height: 2rem;
+  border-radius: 0.25rem;
+  background-color: var(--color-day-white);
+  border: 0.0625rem solid var(--color-blue);
+  box-sizing: border-box;
+}
+
+.custom-filter__prefix {
+  padding-left: 0.5rem;
+}
+
+.custom-filter__input {
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  border: none;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+.custom-filter__input::placeholder {
+  color: var(--color-day-light-blue);
+}
+
+.custom-filter__button {
+  position: absolute;
+  right: 0.25rem;
+}
+
+.custom-filter__button .custom-filter__icon {
+  stroke: var(--color-day-light-blue);
+  fill: var(--color-day-light-blue);
+}
