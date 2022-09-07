@@ -7,21 +7,21 @@ import SearchFilter from "./components/SearchFilter/SearchFilter";
 
 function App() {
   return (
-    <div className="wrap">
+    <div className='wrap'>
       <Header />
       <SearchFilter />
       <Button
-        className="button_size_middle button_color_primary"
-        icon={<AbortIcon className="button__icon" />}
-        text="Text here"
+        className='button_size_middle button_color_primary'
+        icon={<AbortIcon className='button__icon' />}
+        text='Text here'
       />
       <Button
-        className="button_size_middle button_color_primary"
-        text="Text here"
+        className='button_size_middle button_color_primary'
+        text='Text here'
       />
       <Button
-        className="button_without-text_middle button_color_primary"
-        icon={<SunIcon className="button__icon" />}
+        className='button_without-text_middle button_color_primary'
+        icon={<SunIcon className='button__icon' />}
       />
     </div>
   );

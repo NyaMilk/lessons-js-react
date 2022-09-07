@@ -44,15 +44,16 @@
   gap: 0.25rem;
 }
 
-/*.filter__group_status {*/
-/*  width: 12rem;*/
-/*}*/
+.filter-dropdown__title {
+  display: block;
+  margin-bottom: 0.5rem;
+}
 
-/*.filter__input_status {*/
-/*  padding-left: 0.5rem;*/
-/*}*/
+.filter-dropdown__input {
+  width: 12rem;
+}
 
-.filter__modal {
+.filter-dropdown__modal {
   position: absolute;
   top: 4.75rem;
   left: 22rem;
