@@ -27,18 +27,15 @@
       "react-app/jest"
     ],
     "rules": {
-      "quotes": [
-        "error",
-        "prefer-single"
-      ],
       "jsx-quotes": [
-        "error",
-        "prefer-double"
+        2,
+        "prefer-single"
       ]
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,html,css}": "prettier --write"
+    "src/**/*.{js,jsx,html,css}": "prettier --write",
+    "src/**/*.{js,jsx}": "eslint --fix"
   },
   "browserslist": {
     "production": [
