@@ -26,6 +26,12 @@
   border-radius: 0.5rem;
   background-color: var(--color-day-white-blue);
   position: relative;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.filterbar-active {
+  opacity: 1;
 }
 
 .filter {
@@ -57,4 +63,10 @@
   position: absolute;
   top: 4.75rem;
   left: 22rem;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.filter-dropdown__modal-active {
+  opacity: 1;
 }

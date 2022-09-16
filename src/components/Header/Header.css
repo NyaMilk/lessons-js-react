@@ -7,14 +7,14 @@
   margin-bottom: 3rem;
 }
 
-.header__button {
-  width: 8.75rem;
-  height: 2rem;
-  padding: 0.5rem 1rem;
-}
-
-.header .custom-dropdown_switcher {
+.header__dropdown {
   position: absolute;
   top: 2.25rem;
   right: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.header__dropdown-active {
+  opacity: 1;
 }

@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { Button } from "../Button/Button";
-import { SunIcon } from "../Icons/Icons";
 import { DropdownSwitcher } from "../Dropdowns/Dropdowns";
+import { SunIcon } from "../Icons";
 
 function Header() {
-  const [show, setModal] = useState(false);
+  const [show, setShow] = useState(false);
+
+  console.log(show);
 
   useEffect(() => {
-    const onClickOutside = () => setModal(false);
-
+    const onClickOutside = () => setShow(false);
     if (show) {
       window.addEventListener("click", onClickOutside);
     }
-
     return () => window.removeEventListener("click", onClickOutside);
   }, [show]);
 
   const toggleModal = (e) => {
     e.stopPropagation();
-    setModal(!show);
+    setShow(!show);
   };
 
   return (
@@ -31,7 +31,11 @@ function Header() {
         text="Светлая тема"
         onClick={toggleModal}
       />
-      {show && <DropdownSwitcher />}
+      <DropdownSwitcher
+        className={`header__dropdown ${
+          !show ? "" : "header__dropdown-active"
+        } `}
+      />
     </header>
   );
 }

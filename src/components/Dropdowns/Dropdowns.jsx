@@ -1,7 +1,7 @@
 import React from "react";
 import "./Dropdowns.css";
 import { Button } from "../Button/Button";
-import { MoonIcon, SunIcon } from "../Icons/Icons";
+import { SunIcon, MoonIcon } from "../Icons";
 import { InputCheckbox, InputRadio } from "../Inputs/Inputs";
 
 export const DropdownMultiple = ({
@@ -44,9 +44,9 @@ export const DropdownSingle = ({ list, className = "", disabled }) => {
   );
 };
 
-export const DropdownSwitcher = () => {
+export const DropdownSwitcher = ({ className = "" }) => {
   return (
-    <div className="custom-dropdown custom-dropdown_switcher">
+    <div className={`custom-dropdown custom-dropdown_switcher ${className}`}>
       Выберите тему
       <Button
         className="button_size_small button_transparent"

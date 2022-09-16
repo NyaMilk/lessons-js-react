@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import "./SearchFilter.css";
 import { Button } from "../Button/Button";
+import { InputSearchbar, InputFilter, InputDropdown } from "../Inputs/Inputs";
+import { DropdownMultiple } from "../Dropdowns/Dropdowns";
 import {
   FilterIcon,
   RefreshIcon,
   SearchIcon,
   VArrowIcon,
-  XMefiumIcon,
-} from "../Icons/Icons";
-import { InputSearchbar, InputFilter, InputDropdown } from "../Inputs/Inputs";
-import { DropdownMultiple } from "../Dropdowns/Dropdowns";
+  XMediumIcon,
+} from "../Icons";
 
 const Filter = ({ title, filterFrom, filterTo }) => {
   return (
@@ -24,13 +24,14 @@ const Filter = ({ title, filterFrom, filterTo }) => {
 };
 
 function SearchFilter() {
-  const [text, setText] = useState({
+  const initialInputState = {
     searchbar: "",
     filterFromDate: "",
     filterToDate: "",
     filterFromAmount: "",
     filterToAmount: "",
-  });
+  };
+  const [text, setText] = useState(initialInputState);
   const dropdownItems = [
     "Новый",
     "Рассчет",
@@ -41,30 +42,22 @@ function SearchFilter() {
   ];
   const [valueInputDropdown, setValueInputDropdown] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
+  const [checked, setChecked] = useState(true);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const inputChange = ({ target: { name, value } }) => {
     setText({ ...text, [name]: value });
   };
 
-  const clearInputSearchbar = () => {
-    setText({ ...text, searchbar: "" });
+  const clearInput = (name) => {
+    return () => setText({ ...text, [name]: "" });
   };
 
-  const clearFilterFromDate = () => {
-    setText({ ...text, filterFromDate: "" });
-  };
-
-  const clearFilterToDate = () => {
-    setText({ ...text, filterToDate: "" });
-  };
-
-  const clearFilterFromAmount = () => {
-    setText({ ...text, filterFromAmount: "" });
-  };
-
-  const clearFilterToAmount = () => {
-    setText({ ...text, filterToAmount: "" });
+  const clearAllInput = () => {
+    setText(initialInputState);
+    setValueInputDropdown([]);
+    setChecked(!checked);
+    // setShowDropdown(false);
   };
 
   const inputDropdownChange = ({ target: { name, checked } }) => {
@@ -84,10 +77,7 @@ function SearchFilter() {
   const toggleFilterModal = (e) => {
     e.stopPropagation();
     setShowFilter(!showFilter);
-
-    if (!showFilter) {
-      setShowDropdown(false);
-    }
+    setShowDropdown(false);
   };
 
   const toggleDropdownModal = (e) => {
@@ -109,9 +99,9 @@ function SearchFilter() {
               <Button
                 className="custom-searchbar__button button_without-text_small button_transparent"
                 icon={
-                  <XMefiumIcon className="button__icon custom-searchbar__icon" />
+                  <XMediumIcon className="button__icon custom-searchbar__icon" />
                 }
-                onClick={clearInputSearchbar}
+                onClick={clearInput("searchbar")}
               />
             }
           />
@@ -124,6 +114,7 @@ function SearchFilter() {
           <Button
             className="button_size_middle button_transparent"
             text="Сбросить фильтры"
+            onClick={clearAllInput}
           />
         </div>
         <Button
@@ -133,117 +124,117 @@ function SearchFilter() {
         />
       </div>
 
-      {showFilter && (
-        <div className="filterbar">
-          <Filter
-            title="Дата оформления"
-            filterFrom={
-              <InputFilter
-                prefix="с"
-                name="filterFromDate"
-                placeholder="dd.mm.yyyy"
-                onChange={inputChange}
-                value={text.filterFromDate}
-                button={
-                  <Button
-                    className="custom-filter__button button_without-text_small button_transparent"
-                    icon={
-                      <XMefiumIcon className="button__icon custom-filter__icon" />
-                    }
-                    onClick={clearFilterFromDate}
-                  />
-                }
-              />
-            }
-            filterTo={
-              <InputFilter
-                prefix="по"
-                name="filterToDate"
-                placeholder="dd.mm.yyyy"
-                onChange={inputChange}
-                value={text.filterToDate}
-                button={
-                  <Button
-                    className="custom-filter__button button_without-text_small button_transparent"
-                    icon={
-                      <XMefiumIcon className="button__icon custom-filter__icon" />
-                    }
-                    onClick={clearFilterToDate}
-                  />
-                }
-              />
-            }
-          />
-
-          <div className="filter-dropdown">
-            <span className="filter-dropdown__title">Статус заказа</span>
-            <InputDropdown
-              className="filter-dropdown__input"
-              defaultValue="Любой"
+      <div className={`filterbar ${!showFilter ? "" : "filterbar-active"}`}>
+        <Filter
+          title="Дата оформления"
+          filterFrom={
+            <InputFilter
+              prefix="с"
+              name="filterFromDate"
+              placeholder="dd.mm.yyyy"
+              onChange={inputChange}
+              value={text.filterFromDate}
               button={
                 <Button
-                  className="custom-input__button button_without-text_small button_transparent"
+                  className="custom-filter__button button_without-text_small button_transparent"
                   icon={
-                    <VArrowIcon className="button__icon custom-input__icon" />
+                    <XMediumIcon className="button__icon custom-filter__icon" />
                   }
-                  onClick={toggleDropdownModal}
+                  onClick={clearInput("filterFromDate")}
                 />
               }
             />
-            {showDropdown && (
-              <DropdownMultiple
-                list={dropdownItems}
-                className="filter-dropdown__modal"
-                onChange={inputDropdownChange}
-              />
-            )}
-          </div>
+          }
+          filterTo={
+            <InputFilter
+              prefix="по"
+              name="filterToDate"
+              placeholder="dd.mm.yyyy"
+              onChange={inputChange}
+              value={text.filterToDate}
+              button={
+                <Button
+                  className="custom-filter__button button_without-text_small button_transparent"
+                  icon={
+                    <XMediumIcon className="button__icon custom-filter__icon" />
+                  }
+                  onClick={clearInput("filterToDate")}
+                />
+              }
+            />
+          }
+        />
 
-          <Filter
-            title="Сумма заказа"
-            filterFrom={
-              <InputFilter
-                prefix="от"
-                name="filterFromAmount"
-                placeholder="&#8381;"
-                onChange={inputChange}
-                value={text.filterFromAmount}
-                button={
-                  <Button
-                    className="custom-filter__button button_without-text_small button_transparent"
-                    icon={
-                      <XMefiumIcon className="button__icon custom-filter__icon" />
-                    }
-                    onClick={clearFilterFromAmount}
-                  />
+        <div className="filter-dropdown">
+          <span className="filter-dropdown__title">Статус заказа</span>
+          <InputDropdown
+            className="filter-dropdown__input"
+            defaultValue="Любой"
+            button={
+              <Button
+                className="custom-input__button button_without-text_small button_transparent"
+                icon={
+                  <VArrowIcon className="button__icon custom-input__icon" />
                 }
-              />
-            }
-            filterTo={
-              <InputFilter
-                prefix="по"
-                name="filterToAmount"
-                placeholder="&#8381;"
-                onChange={inputChange}
-                value={text.filterToAmount}
-                button={
-                  <Button
-                    className="custom-filter__button button_without-text_small button_transparent"
-                    icon={
-                      <XMefiumIcon className="button__icon custom-filter__icon" />
-                    }
-                    onClick={clearFilterToAmount}
-                  />
-                }
+                onClick={toggleDropdownModal}
               />
             }
           />
-          <Button
-            className="button_size_middle button_transparent"
-            text="Применить"
-          />
+          <Fragment key={checked}>
+            <DropdownMultiple
+              list={dropdownItems}
+              className={`filter-dropdown__modal ${
+                !showDropdown ? "" : "filter-dropdown__modal-active"
+              }`}
+              onChange={inputDropdownChange}
+            />
+          </Fragment>
         </div>
-      )}
+
+        <Filter
+          title="Сумма заказа"
+          filterFrom={
+            <InputFilter
+              prefix="от"
+              name="filterFromAmount"
+              placeholder="&#8381;"
+              onChange={inputChange}
+              value={text.filterFromAmount}
+              button={
+                <Button
+                  className="custom-filter__button button_without-text_small button_transparent"
+                  icon={
+                    <XMediumIcon className="button__icon custom-filter__icon" />
+                  }
+                  onClick={clearInput("filterFromAmount")}
+                />
+              }
+            />
+          }
+          filterTo={
+            <InputFilter
+              prefix="по"
+              name="filterToAmount"
+              placeholder="&#8381;"
+              onChange={inputChange}
+              value={text.filterToAmount}
+              button={
+                <Button
+                  className="custom-filter__button button_without-text_small button_transparent"
+                  icon={
+                    <XMediumIcon className="button__icon custom-filter__icon" />
+                  }
+                  onClick={clearInput("filterToAmount")}
+                />
+              }
+            />
+          }
+        />
+        <Button
+          className="button_size_middle button_transparent"
+          text="Применить"
+        />
+      </div>
     </section>
   );
 }

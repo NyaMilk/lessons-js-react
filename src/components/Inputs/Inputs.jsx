@@ -1,6 +1,6 @@
 import React from "react";
 import "./Inputs.css";
-import { CheckmarkIcon } from "../Icons/Icons";
+import { CheckmarkIcon } from "../Icons";
 
 export const InputCheckbox = ({ className = "", text, disabled, onChange }) => {
   const classInput = disabled ? "custom-checkbox__item_disabled" : "";
