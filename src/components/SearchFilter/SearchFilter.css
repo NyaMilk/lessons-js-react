@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
 .searchbar__group {
@@ -14,9 +14,9 @@
   width: 20rem;
 }
 
-.search-filter {
+/* .search-filter {
   margin-bottom: 2rem;
-}
+} */
 
 .filterbar {
   display: flex;
@@ -26,12 +26,20 @@
   border-radius: 0.5rem;
   background-color: var(--color-day-white-blue);
   position: relative;
+  max-height: 0;
   opacity: 0;
-  transition: opacity 0.3s ease-out;
+  overflow: hidden;
+  z-index: -1;
+  transition: max-height 0.3s ease-out, opacity 0.2s ease-out 0.1s,
+    margin 0.2s ease-out 0.1s;
 }
 
 .filterbar-active {
+  margin: 1rem 0 2rem;
+  max-height: 5.5rem;
   opacity: 1;
+  overflow: visible;
+  z-index: 0;
 }
 
 .filter {
