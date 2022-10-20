@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Table.css";
 import { InputCheckbox } from "../Inputs/Inputs";
-import { AbortIcon, CheckmarkIcon, DotIcon, VArrowIcon } from "../Icons";
+import {
+  AbortIcon,
+  BinIcon,
+  CheckmarkIcon,
+  DotIcon,
+  PencilIcon,
+  VArrowIcon,
+} from "../Icons";
+import { Button } from "../Button/Button";
+import { useDispatch, useSelector } from "react-redux/es";
 import dataMock from "../../assets/mock/table.json";
+import { getAllDate } from "../../redux/tableSlice";
+import { DropdownDelete } from "../Dropdowns/Dropdowns";
 
 const TableCeil = ({ text, className, iconHeader, iconBody, input }) => {
   return (
@@ -16,9 +27,12 @@ const TableCeil = ({ text, className, iconHeader, iconBody, input }) => {
 };
 
 const TableBody = () => {
+  // const limitData = dataMock.slice(0, 3).map(({ id }) => id);
+  const limitData = dataMock.slice(0, 2);
+  console.log(limitData);
   return (
     <div class="table__body">
-      {dataMock.map(({ id, date, status, count, amount, name }) => {
+      {limitData.map(({ id, date, status, count, amount, name }) => {
         count = count ? count : "–";
         amount = amount ? Number(amount).toLocaleString() + " ₽" : "–";
         let icon = "";
@@ -34,7 +48,7 @@ const TableBody = () => {
             icon = <CheckmarkIcon className="table__icon" />;
             break;
           case "Отменен":
-            className = "table__ceil_status_cansel";
+            className = "table__ceil_status_cancel";
             icon = <AbortIcon className="table__icon" />;
             break;
           default:
@@ -65,8 +79,130 @@ const TableBody = () => {
   );
 };
 
+const Pagination = ({ rows }) => {
+  const countPages = Math.ceil(rows / 3);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const changePage = ({ target: { value } }) => {
+    value = Number(value);
+    if (currentPage !== value) {
+      setCurrentPage(value);
+      console.log("value ola", value);
+      console.log("current page", currentPage);
+    }
+  };
+
+  let firstPage, lastPage;
+
+  if (countPages > 1) {
+    if (currentPage === 1 && countPages > 2) {
+      lastPage = currentPage + 2;
+      firstPage = currentPage;
+    } else if (currentPage === 1 && countPages === 2) {
+      lastPage = currentPage + 1;
+      firstPage = currentPage;
+    } else if (currentPage === countPages && countPages > 2) {
+      lastPage = currentPage + 1;
+      firstPage = currentPage - 2;
+    } else {
+      lastPage = currentPage + 1;
+      firstPage = currentPage - 1;
+    }
+  }
+
+  const pageList = [...Array(countPages + 1).keys()].slice(
+    firstPage,
+    lastPage + 1
+  );
+
+  return (
+    <div className="pagination">
+      <div className="pagination__list">
+        {countPages > 3 && currentPage !== 1 && (
+          <>
+            <Button
+              className={"button button_size_small button_transparent"}
+              text="1"
+              value="1"
+              onClick={changePage}
+            />
+            {/* <span>...</span> */}
+            <Button
+              className={"button button_size_small button_transparent"}
+              text="..."
+            />
+          </>
+        )}
+        {pageList.map((page) => (
+          <Button
+            key={page}
+            className={`button_size_small ${
+              page === currentPage
+                ? "button_color_primary"
+                : "button_transparent"
+            }`}
+            text={page}
+            value={page}
+            onClick={changePage}
+          />
+        ))}
+        {countPages > 3 && (
+          <>
+            <Button
+              className={`button button_size_small button_transparent ${
+                countPages === currentPage
+                  ? "button_with_opacity"
+                  : "button_transparent"
+              }`}
+              text="..."
+            />
+            {/* <span>...</span> */}
+            <Button
+              className={`button button_size_small button_transparent ${
+                countPages === currentPage
+                  ? "button_with_opacity"
+                  : "button_transparent"
+              }`}
+              text={countPages}
+              value={countPages}
+              onClick={changePage}
+            />
+          </>
+        )}
+      </div>
+      <Button
+        className={"button button_size_small button_transparent"}
+        text="#"
+      />
+    </div>
+  );
+};
+
 function Table() {
-  console.log(dataMock);
+  // const state = useSelector(state => state.table)
+  // console.log(state);
+  // const dispatch = useDispatch();
+  // dispatch(getAllDate(dataMock));
+  // dispatch(tableClear())
+  // useEffect(() => {
+  //   dispatch(getAllDate(data));
+  // }, [getAllDate]);
+
+  const [recordCount, setRecordCount] = useState(0);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const onClickOutside = () => setShow(false);
+    if (show) {
+      window.addEventListener("click", onClickOutside);
+    }
+    return () => window.removeEventListener("click", onClickOutside);
+  }, [show]);
+
+  const toggleModal = (e) => {
+    e.stopPropagation();
+    setShow(!show);
+  };
 
   return (
     <section class="table">
@@ -103,68 +239,23 @@ function Table() {
 
       <div class="table__footer">
         <div class="footer__group">
-          <span class="footer__text">Выбрано записей: 5</span>
-          <button class="button button_size_small button_primary">
-            <svg
-              class="button__icon"
-              viewBox="0 0 16 16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M6 14.5H15" fill="none" />
-              <path
-                d="M5 13L1.5 14.5L3 11M5 13L3 11M5 13L12 6M3 11L10 4M11 3L12.5 1.5L14.5 3.5L13 5M11 3L13 5M11 3L10 4M13 5L12 6M12 6L10 4"
-                fill="none"
-              />
-            </svg>
-            <span class="button__text">Изменить статус</span>
-          </button>
-          <button class="button button_size_small button_primary button_color_red">
-            <svg
-              class="button__icon"
-              viewBox="0 0 16 16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M2 3.5H3.5M14 3.5H12.5M5.5 3.5H10.5M5.5 3.5V2.5C5.5 1.94772 5.94772 1.5 6.5 1.5H9.5C10.0523 1.5 10.5 1.94772 10.5 2.5V3.5M5.5 3.5H3.5M10.5 3.5H12.5M3.5 3.5V13.5C3.5 14.0523 3.94772 14.5 4.5 14.5H11.5C12.0523 14.5 12.5 14.0523 12.5 13.5V3.5"
-                fill="none"
-                stroke-linecap="round"
-              />
-              <path d="M6.5 6V12M9.5 6V12" fill="none" stroke-linecap="round" />
-            </svg>
-            <span class="button__text">Удалить</span>
-          </button>
+          <span class="footer__text">Выбрано записей: {recordCount}</span>
+          <Button
+            className="button_size_small button_color_primary"
+            icon={<PencilIcon className="button__icon" />}
+            text="Изменить статус"
+          />
+          <Button
+            className="button_size_small button_color_red"
+            icon={<BinIcon className="button__icon" />}
+            text="Удалить"
+            onClick={toggleModal}
+          />
         </div>
-        {/* <div class="custom-dropdown custom-dropdown_delete table__modal">
-                    Удалить n записей?
-                    <button class="button button_size_small button_transparent">
-                        <span class="button__text">Удалить</span>
-                    </button>
-                    <button class="button button_size_small button_primary">
-                        <span class="button__text">Отмена</span>
-                    </button>
-                </div> */}
-        <div class="pagination">
-          <div class="pagination__list">
-            <button class="button button_size_small button_primary">
-              <span class="button__text">1</span>
-            </button>
-            <button class="button button_size_small button_transparent">
-              <span class="button__text">2</span>
-            </button>
-            <button class="button button_size_small button_transparent">
-              <span class="button__text">3</span>
-            </button>
-            <button class="button button_size_small button_transparent">
-              <span class="button__text">...</span>
-            </button>
-            <button class="button button_size_small button_transparent">
-              <span class="button__text">18</span>
-            </button>
-          </div>
-          <button class="button button_size_small button_transparent pagination__icon">
-            <span class="button__text">#</span>
-          </button>
-        </div>
+        <DropdownDelete
+          className={`table__modal ${!show ? "" : "table__modal-active"} `}
+        />
+        <Pagination rows={dataMock.length} />
       </div>
     </section>
   );

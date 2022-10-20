@@ -7,8 +7,6 @@ import { SunIcon } from "../Icons";
 function Header() {
   const [show, setShow] = useState(false);
 
-  console.log(show);
-
   useEffect(() => {
     const onClickOutside = () => setShow(false);
     if (show) {
@@ -32,9 +30,7 @@ function Header() {
         onClick={toggleModal}
       />
       <DropdownSwitcher
-        className={`header__dropdown ${
-          !show ? "" : "header__dropdown-active"
-        } `}
+        className={`header__dropdown ${show ? "header__dropdown-active" : ""} `}
       />
     </header>
   );

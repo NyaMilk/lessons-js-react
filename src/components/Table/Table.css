@@ -75,11 +75,11 @@
   fill: var(--color-orange);
 }
 
-.table__ceil_status_cansel {
+.table__ceil_status_cancel {
   opacity: 0.5;
 }
 
-.table__ceil_status_cansel .table__icon {
+.table__ceil_status_cancel .table__icon {
   stroke: var(--color-day-black);
 }
 
@@ -97,6 +97,14 @@
   position: absolute;
   top: -6.8rem;
   left: 19.25rem;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  z-index: -1;
+}
+
+.table__modal-active {
+  opacity: 1;
+  z-index: 0;
 }
 
 .footer__group {
@@ -120,7 +128,7 @@
 }
 
 .table__body {
-  height: 25rem;
+  height: 28rem;
   padding-bottom: 3rem;
   overflow: auto;
 }

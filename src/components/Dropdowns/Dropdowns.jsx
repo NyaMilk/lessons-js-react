@@ -61,3 +61,16 @@ export const DropdownSwitcher = ({ className = "" }) => {
     </div>
   );
 };
+
+export const DropdownDelete = ({ className = "", reconrdCount = 0 }) => {
+  return (
+    <div className={`custom-dropdown custom-dropdown_delete ${className}`}>
+      Удалить {reconrdCount} записей?
+      <Button className="button_size_small button_transparent" text="Удалить" />
+      <Button
+        className="button_size_small button_color_primary"
+        text="Отмена"
+      />
+    </div>
+  );
+};
