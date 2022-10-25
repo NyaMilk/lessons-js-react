@@ -1,0 +1,60 @@
+._ {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  width: 12rem;
+  height: 2rem;
+}
+
+.input {
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  background-color: var(--color-day-white);
+  border: 0.0625rem solid var(--color-blue);
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.input::placeholder {
+  color: var(--color-day-light-blue);
+}
+
+.icon {
+  position: absolute;
+  right: 0;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+  stroke: var(--color-day-light-blue);
+  fill: var(--color-day-light-blue);
+  cursor: pointer;
+}
+
+.modal {
+  position: absolute;
+  top: 2.25rem;
+  right: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.modalActive {
+  opacity: 1;
+}
+
+.disabled .input {
+  background-color: var(--color-day-light-blue);
+  border: 0.0625rem solid var(--color-blue);
+  color: var(--color-day-black);
+}
+
+.disabled .icon {
+  fill: var(--color-day-black);
+  stroke: var(--color-day-black);
+}

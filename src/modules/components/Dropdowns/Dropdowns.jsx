@@ -1,7 +1,7 @@
 import React from "react";
 import "./Dropdowns.css";
 import { Button } from "../Button/Button";
-import { SunIcon, MoonIcon } from "../Icons";
+import { SunIcon, MoonIcon } from "../../../components/Icons";
 import { InputCheckbox, InputRadio } from "../Inputs/Inputs";
 
 export const DropdownMultiple = ({
@@ -50,12 +50,12 @@ export const DropdownSwitcher = ({ className = "" }) => {
       Выберите тему
       <Button
         className="button_size_small button_transparent"
-        icon={<SunIcon className="button__icon" />}
+        // icon={<SunIcon className="button__icon" />}
         text="Светлая"
       />
       <Button
         className="button_size_small button_color_primary"
-        icon={<MoonIcon className="button__icon" />}
+        // icon={<MoonIcon className="button__icon" />}
         text="Темная"
       />
     </div>

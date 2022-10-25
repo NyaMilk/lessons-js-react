@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Table.css";
-import { InputCheckbox } from "../Inputs/Inputs";
 import {
   AbortIcon,
   BinIcon,
@@ -8,12 +7,13 @@ import {
   DotIcon,
   PencilIcon,
   VArrowIcon,
-} from "../Icons";
-import { Button } from "../Button/Button";
+} from "../../../shared/components/Icons";
+import { Checkbox } from "../../../shared/components/Checkbox/Checkbox";
+import { Button } from "../../../shared/components/Button/Button";
 import { useDispatch, useSelector } from "react-redux/es";
-import dataMock from "../../assets/mock/table.json";
-import { getAllDate } from "../../redux/tableSlice";
-import { DropdownDelete } from "../Dropdowns/Dropdowns";
+import dataMock from "../../../assets/mock/table.json";
+import { getAllDate } from "../../../redux/tableSlice";
+import { DropdownDelete } from "../../../shared/components/Dropdowns/Dropdowns";
 
 const TableCeil = ({ text, className, iconHeader, iconBody, input }) => {
   return (
@@ -31,7 +31,7 @@ const TableBody = () => {
   const limitData = dataMock.slice(0, 2);
   console.log(limitData);
   return (
-    <div class="table__body">
+    <div className="table__body">
       {limitData.map(({ id, date, status, count, amount, name }) => {
         count = count ? count : "–";
         amount = amount ? Number(amount).toLocaleString() + " ₽" : "–";
@@ -60,7 +60,7 @@ const TableBody = () => {
           <div className="table__row" key={id}>
             <TableCeil
               className="table__ceil_with-checkbox"
-              input={<InputCheckbox />}
+              input={<Checkbox />}
             />
             <TableCeil text={id} className="table__ceil_number" />
             <TableCeil text={date} className="table__ceil_date" />
@@ -120,60 +120,49 @@ const Pagination = ({ rows }) => {
       <div className="pagination__list">
         {countPages > 3 && currentPage !== 1 && (
           <>
-            <Button
-              className={"button button_size_small button_transparent"}
-              text="1"
-              value="1"
-              onClick={changePage}
-            />
-            {/* <span>...</span> */}
-            <Button
-              className={"button button_size_small button_transparent"}
-              text="..."
-            />
+            <Button size="small" transparent value="1" onClick={changePage}>
+              1
+            </Button>
+            <Button size="small" transparent>
+              ...
+            </Button>
           </>
         )}
         {pageList.map((page) => (
           <Button
             key={page}
-            className={`button_size_small ${
-              page === currentPage
-                ? "button_color_primary"
-                : "button_transparent"
-            }`}
-            text={page}
+            size="small"
+            transparent={page !== currentPage}
             value={page}
             onClick={changePage}
-          />
+          >
+            {page}
+          </Button>
         ))}
         {countPages > 3 && (
           <>
             <Button
-              className={`button button_size_small button_transparent ${
-                countPages === currentPage
-                  ? "button_with_opacity"
-                  : "button_transparent"
-              }`}
-              text="..."
-            />
-            {/* <span>...</span> */}
+              size="small"
+              transparent={countPages !== currentPage}
+              opacity={countPages === currentPage}
+            >
+              ...
+            </Button>
             <Button
-              className={`button button_size_small button_transparent ${
-                countPages === currentPage
-                  ? "button_with_opacity"
-                  : "button_transparent"
-              }`}
-              text={countPages}
+              size="small"
+              transparent={countPages !== currentPage}
+              opacity={countPages === currentPage}
               value={countPages}
               onClick={changePage}
-            />
+            >
+              {countPages}
+            </Button>
           </>
         )}
       </div>
-      <Button
-        className={"button button_size_small button_transparent"}
-        text="#"
-      />
+      <Button size="small" transparent>
+        #
+      </Button>
     </div>
   );
 };
@@ -205,12 +194,9 @@ function Table() {
   };
 
   return (
-    <section class="table">
-      <div class="table__head">
-        <TableCeil
-          className="table__ceil_with-checkbox"
-          input={<InputCheckbox />}
-        />
+    <section className="table">
+      <div className="table__head">
+        <TableCeil className="table__ceil_with-checkbox" input={<Checkbox />} />
         <TableCeil text="#" className="table__ceil_number" />
         <TableCeil
           text="Дата"
@@ -237,20 +223,20 @@ function Table() {
 
       <TableBody />
 
-      <div class="table__footer">
-        <div class="footer__group">
-          <span class="footer__text">Выбрано записей: {recordCount}</span>
+      <div className="table__footer">
+        <div className="footer__group">
+          <span className="footer__text">Выбрано записей: {recordCount}</span>
+          <Button size="small" icon={{ icon: PencilIcon }}>
+            Изменить статус
+          </Button>
           <Button
-            className="button_size_small button_color_primary"
-            icon={<PencilIcon className="button__icon" />}
-            text="Изменить статус"
-          />
-          <Button
-            className="button_size_small button_color_red"
-            icon={<BinIcon className="button__icon" />}
-            text="Удалить"
+            theme="secondary"
+            size="small"
+            icon={{ icon: BinIcon }}
             onClick={toggleModal}
-          />
+          >
+            Удалить
+          </Button>
         </div>
         <DropdownDelete
           className={`table__modal ${!show ? "" : "table__modal-active"} `}
