@@ -1,4 +1,10 @@
 /* table */
+.table {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
 .table__head {
   display: flex;
   background-color: var(--color-blue);
@@ -91,6 +97,7 @@
   padding: 0.5rem 1rem;
   box-sizing: border-box;
   background-color: var(--color-day-white-blue);
+  margin-top: 3rem;
 }
 
 .table__modal {
@@ -128,8 +135,8 @@
 }
 
 .table__body {
+  flex: 1 1 auto;
   height: 28rem;
-  padding-bottom: 3rem;
   overflow: auto;
 }
 

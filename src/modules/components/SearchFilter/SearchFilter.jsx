@@ -161,7 +161,6 @@ function SearchFilter() {
             onChange={inputDropdownChange}
             checked={isChecked}
             active={isShowDropdown}
-            disabled
           />
         </div>
 

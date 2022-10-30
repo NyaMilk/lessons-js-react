@@ -28,11 +28,11 @@ const TableCeil = ({ text, className, iconHeader, iconBody, input }) => {
 
 const TableBody = () => {
   // const limitData = dataMock.slice(0, 3).map(({ id }) => id);
-  const limitData = dataMock.slice(0, 2);
+  const limitData = dataMock.slice(0, 50);
   console.log(limitData);
   return (
     <div className="table__body">
-      {limitData.map(({ id, date, status, count, amount, name }) => {
+      {limitData.map(({ id, date, status, count, amount, name }, index) => {
         count = count ? count : "–";
         amount = amount ? Number(amount).toLocaleString() + " ₽" : "–";
         let icon = "";
@@ -57,7 +57,7 @@ const TableBody = () => {
         }
 
         return (
-          <div className="table__row" key={id}>
+          <div className="table__row" key={index}>
             <TableCeil
               className="table__ceil_with-checkbox"
               input={<Checkbox />}

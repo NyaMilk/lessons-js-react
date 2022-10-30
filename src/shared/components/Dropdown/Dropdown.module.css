@@ -13,6 +13,7 @@
   padding: 0.5rem 2rem 0.5rem 0.5rem;
   border-radius: 0.25rem;
   box-sizing: border-box;
+  color: var(--color-day-black);
   background-color: var(--color-day-white);
   border: 0.0625rem solid var(--color-blue);
   text-align: start;

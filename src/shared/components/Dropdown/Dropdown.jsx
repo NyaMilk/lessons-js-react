@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import styles from "./Dropdown.module.css";
-import { VArrowIcon } from "../Icons";
+import { LockedIcon, VArrowIcon } from "../Icons";
 import { DropdownList } from "../DropdownList/DropdowmList";
 
 export const Dropdown = ({
@@ -33,7 +33,7 @@ export const Dropdown = ({
         onClick={onClick}
         disabled={disabled}
       />
-      <VArrowIcon className={styles.icon} onClick={onClick} />
+      {disabled ? <LockedIcon className={styles.icon}/> : <VArrowIcon onClick={onClick} className={styles.icon}/>}
       {active && (
         <DropdownList
           className={dropdownListClassName}
