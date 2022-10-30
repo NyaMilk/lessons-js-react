@@ -34,13 +34,15 @@ export const Dropdown = ({
         disabled={disabled}
       />
       <VArrowIcon className={styles.icon} onClick={onClick} />
-      <DropdownList
-        type={type}
-        className={dropdownListClassName}
-        list={items}
-        onChange={onChange}
-        checked={checked}
-      />
+      {active && (
+        <DropdownList
+          className={dropdownListClassName}
+          type={type}
+          list={items}
+          onChange={onChange}
+          checked={checked}
+        />
+      )}
     </div>
   );
 };

@@ -11,7 +11,7 @@ export const Searchbar = ({
   placeholder,
   onChange,
   value,
-  buttonProps = {},
+  button: buttonProps = {},
   disabled,
 }) => {
   const customSearchbarClass = classnames(styles._, className);
@@ -35,7 +35,6 @@ export const Searchbar = ({
         <Button
           className={styles.button}
           prefixIcon={{ icon: XMediumIcon, iconClassName: styles.icon }}
-          transparent
           {...buttonProps}
         />
       )}

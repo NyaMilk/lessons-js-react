@@ -15,14 +15,13 @@ export const Button = ({
   opacity,
   onClick,
 }) => {
-  let buttonClass = classnames(
+  const buttonClass = classnames(
     styles._,
     className,
     styles[`theme_${theme}`],
     styles[`size_${size}`],
     {
-      [styles.withoutText_middle]: !children && size === "middle",
-      [styles.withoutText_small]: !children && size === "small",
+      [styles.icon_only]: !children,
       [styles.transparent]: !!transparent,
       [styles.disabled]: !!disabled,
       [styles.opacity]: !!opacity,

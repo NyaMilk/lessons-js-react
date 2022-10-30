@@ -42,9 +42,9 @@ function SearchFilter() {
     "Новый",
     "Рассчет",
     "Подтвержден",
-    "Отложен",
-    "Выполнен",
-    "Отменен",
+    // "Отложен",
+    // "Выполнен",
+    // "Отменен",
   ];
   const [dropdownValues, setDropdownValues] = useState([]);
 
@@ -52,9 +52,7 @@ function SearchFilter() {
     setText({ ...text, [name]: value });
   };
 
-  const clearInput = (name) => {
-    return () => setText({ ...text, [name]: "" });
-  };
+  const clearInput = (name) => () => setText({ ...text, [name]: "" });
 
   const clearAllInput = () => {
     setText(initialInputState);
@@ -115,6 +113,9 @@ function SearchFilter() {
           Загрузка
         </Button>
       </div>
+      {/* <SearchbarPanel
+        onChange={inputChange}
+      /> */}
 
       <div className={`filterbar ${!isShowFilter ? "" : "filterbar-active"}`}>
         <Filter

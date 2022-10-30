@@ -36,7 +36,7 @@
 .button {
   position: absolute;
   right: 0.25rem;
-  /* bottom: 0.25rem; */
+  bottom: 0.25rem;
 }
 
 .button .icon {
