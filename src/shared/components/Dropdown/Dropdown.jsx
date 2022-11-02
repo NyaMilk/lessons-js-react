@@ -26,10 +26,7 @@ export const Dropdown = ({
 
   return (
     <div>
-      {
-  text &&
-        <span className={titleClassName}>{text}</span>
-      }
+      {text && <span className={titleClassName}>{text}</span>}
       <div className={dropdownClassName}>
         <input
           className={styles.input}
@@ -39,7 +36,11 @@ export const Dropdown = ({
           onClick={onClick}
           disabled={disabled}
         />
-        {disabled ? <LockedIcon className={styles.icon} /> : <VArrowIcon onClick={onClick} className={styles.icon} />}
+        {disabled ? (
+          <LockedIcon className={styles.icon} />
+        ) : (
+          <VArrowIcon onClick={onClick} className={styles.icon} />
+        )}
         {active && (
           <DropdownList
             className={dropdownListClassName}
