@@ -1,16 +1,15 @@
-.searchbar {
+._ {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  /* margin-bottom: 1rem; */
 }
 
-.searchbar__group {
+.group {
   display: flex;
   gap: 1rem;
 }
 
-.searchbar__group > div {
+.group > div {
   width: 20rem;
 }
 
@@ -30,7 +29,7 @@
     margin 0.2s ease-out 0.1s;
 }
 
-.filterbar-active {
+.filterbarActive {
   margin: 1rem 0 2rem;
   max-height: 5.5rem;
   opacity: 1;
@@ -38,19 +37,19 @@
   z-index: 0;
 }
 
-.filter {
-  width: 18rem;
-  display: flex;
-  flex-direction: column;
-}
-
 .filterbar > * {
   opacity: 0;
   transition: all 0.2s ease;
 }
 
-.filterbar-active > * {
+.filterbarActive > * {
   opacity: 1;
+}
+
+.filter {
+  width: 18rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .filter__title {
@@ -63,11 +62,8 @@
   gap: 0.25rem;
 }
 
-.filter-dropdown__title {
+.filterDropdown__title {
   display: block;
   margin-bottom: 0.5rem;
 }
 
-.filter-dropdown__input {
-  width: 12rem;
-}

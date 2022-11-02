@@ -1,5 +1,4 @@
 import React, { useState, Fragment } from "react";
-import "./SearchFilter.css";
 import classnames from "classnames";
 import styles from "./SearchFilter.module.css";
 import { Button } from "../../../shared/components/Button/Button";
@@ -14,9 +13,9 @@ import { Dropdown } from "../../../shared/components/Dropdown/Dropdown";
 
 const Filter = ({ title, filterFrom, filterTo }) => {
   return (
-    <div className="filter">
-      <span className="filter__title">{title}</span>
-      <div className="filter__group">
+    <div className={styles.filter}>
+      <span className={styles.filter__title}>{title}</span>
+      <div className={styles.filter__group}>
         {filterFrom}
         {filterTo}
       </div>
@@ -80,10 +79,17 @@ function SearchFilter() {
     setShowDropdown(!isShowDropdown);
   };
 
+  const filterbarClassName = classnames(
+    styles.filterbar,
+    {
+      [styles.filterbarActive]: !isShowFilter,
+    }
+  );
+
   return (
-    <section className="search-filter">
-      <div className={styles.searchbar}>
-        <div className={styles.searchbar__group}>
+    <section>
+      <div className={styles._}>
+        <div className={styles.group}>
           <Searchbar
             icon={{ icon: SearchIcon }}
             name="searchbar"
@@ -106,7 +112,7 @@ function SearchFilter() {
         <Button
           prefixIcon={{
             icon: RefreshIcon,
-            iconClass: "custom-searchbar__icon",
+            // iconClass: "custom-searchbar__icon",
           }}
           transparent
         >
@@ -117,7 +123,7 @@ function SearchFilter() {
         onChange={inputChange}
       /> */}
 
-      <div className={`filterbar ${!isShowFilter ? "" : "filterbar-active"}`}>
+      <div className={filterbarClassName}>
         <Filter
           title="Дата оформления"
           filterFrom={
@@ -150,19 +156,20 @@ function SearchFilter() {
           }
         />
 
-        <div className="filter-dropdown">
-          <span className="filter-dropdown__title">Статус заказа</span>
-          <Dropdown
-            value={dropdownValues}
-            // defaultValue="Любой"
-            type="multiple"
-            items={dropdownItems}
-            onClick={toggleDropdownModal}
-            onChange={inputDropdownChange}
-            checked={isChecked}
-            active={isShowDropdown}
-          />
-        </div>
+        {/* <div> */}
+        {/* <span className={styles.filterDropdown__title}>Статус заказа</span> */}
+        <Dropdown
+          title={{ text: "Статус заказа", titleClassName: styles.filterDropdown__title }}
+          value={dropdownValues}
+          // defaultValue="Любой"
+          type="multiple"
+          items={dropdownItems}
+          onClick={toggleDropdownModal}
+          onChange={inputDropdownChange}
+          checked={isChecked}
+          active={isShowDropdown}
+        />
+        {/* </div> */}
 
         <Filter
           title="Сумма заказа"
