@@ -27,7 +27,7 @@ export const Dropdown = ({
   return (
     <div>
       {
-        text &&
+  text &&
         <span className={titleClassName}>{text}</span>
       }
       <div className={dropdownClassName}>``
