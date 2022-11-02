@@ -157,18 +157,18 @@ function SearchFilter() {
         />
 
         {/* <div> */}
-        {/* <span className={styles.filterDropdown__title}>Статус заказа</span> */}
-        <Dropdown
-          title={{ text: "Статус заказа", titleClassName: styles.filterDropdown__title }}
-          value={dropdownValues}
-          // defaultValue="Любой"
-          type="multiple"
-          items={dropdownItems}
-          onClick={toggleDropdownModal}
-          onChange={inputDropdownChange}
-          checked={isChecked}
-          active={isShowDropdown}
-        />
+          {/* <span className={styles.filterDropdown__title}>Статус заказа</span> */}
+          <Dropdown
+          title={{text: "Статус заказа", titleClassName: styles.filterDropdown__title}}
+            value={dropdownValues}
+            // defaultValue="Любой"
+            type="multiple"
+            items={dropdownItems}
+            onClick={toggleDropdownModal}
+            onChange={inputDropdownChange}
+            checked={isChecked}
+            active={isShowDropdown}
+          />
         {/* </div> */}
 
         <Filter

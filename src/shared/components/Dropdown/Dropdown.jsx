@@ -30,7 +30,7 @@ export const Dropdown = ({
   text &&
         <span className={titleClassName}>{text}</span>
       }
-      <div className={dropdownClassName}>``
+      <div className={dropdownClassName}>
         <input
           className={styles.input}
           type="button"
