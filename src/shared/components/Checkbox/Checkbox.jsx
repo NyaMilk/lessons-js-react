@@ -1,10 +1,8 @@
 import React from "react";
 import classnames from "classnames";
 import styles from "./Checkbox.module.css";
-import { CheckmarkIcon } from "../Icons";
+import { Icon } from "../Icon/Icon";
 
-// children
-//
 export const Checkbox = ({
   children,
   className,
@@ -12,25 +10,25 @@ export const Checkbox = ({
   hidden,
   onChange,
 }) => {
-  const customCheckboxClass = classnames(styles._, className);
+  const checkboxClassName = classnames(styles._, className);
 
-  const inputClass = classnames(styles.input, {
+  const inputClassName = classnames(styles.input, {
     [styles.disabled]: !!disabled,
     [styles.hidden]: !!hidden,
   });
 
   return (
-    <div className={customCheckboxClass}>
+    <div className={checkboxClassName}>
       <label className={styles.label}>
         <input
-          className={inputClass}
+          className={inputClassName}
           type="checkbox"
           name={children}
           value={children}
-          onChange={onChange}
           disabled={disabled}
+          onChange={onChange}
         />
-        <CheckmarkIcon className={styles.icon} />
+        <Icon name="checkmark" className={styles.icon} />
         {children && <span className={styles.text}>{children}</span>}
       </label>
     </div>

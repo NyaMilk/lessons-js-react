@@ -2,11 +2,11 @@ import React from "react";
 import classnames from "classnames";
 import styles from "./Searchbar.module.css";
 import { Button } from "../Button/Button";
-import { XMediumIcon } from "../Icons";
+import { Icon } from "../Icon/Icon";
 
 export const Searchbar = ({
   className,
-  icon = {},
+  icon: { name: iconName, className: iconClass } = {},
   name,
   placeholder,
   onChange,
@@ -14,27 +14,26 @@ export const Searchbar = ({
   button: buttonProps = {},
   disabled,
 }) => {
-  const customSearchbarClass = classnames(styles._, className);
+  const searchbarClassName = classnames(styles._, className);
 
-  const { icon: Icon, iconClass: iconClassName } = icon;
-  const iconClass = classnames(styles.icon, iconClassName);
+  const iconClassName = classnames(styles.icon, iconClass);
 
   return (
-    <div className={customSearchbarClass}>
+    <div className={searchbarClassName}>
       <input
         className={styles.input}
         type="text"
         name={name}
         value={value}
         placeholder={placeholder}
-        onChange={onChange}
         disabled={disabled}
+        onChange={onChange}
       />
-      {Icon && <Icon className={iconClass} />}
+      {iconName && <Icon className={iconClass} name={iconClassName} />}
       {value && (
         <Button
           className={styles.button}
-          prefixIcon={{ icon: XMediumIcon, iconClassName: styles.icon }}
+          icon={{ name: "close", className: styles.icon }}
           {...buttonProps}
         />
       )}

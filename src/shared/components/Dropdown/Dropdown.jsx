@@ -1,12 +1,11 @@
 import React from "react";
 import classnames from "classnames";
 import styles from "./Dropdown.module.css";
-import { LockedIcon, VArrowIcon } from "../Icons";
+import { LockedIcon, VArrowIcon } from "../Icon/Icon";
 import { DropdownList } from "../DropdownList/DropdowmList";
 
 export const Dropdown = ({
   title: { text, titleClassName },
-  defaultValue,
   value,
   type = "multiple",
   items,
@@ -31,7 +30,6 @@ export const Dropdown = ({
         <input
           className={styles.input}
           type="button"
-          // defaultValue={defaultValue}
           value={value}
           onClick={onClick}
           disabled={disabled}

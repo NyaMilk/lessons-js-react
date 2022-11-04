@@ -1,0 +1,66 @@
+._ {
+  position: relative;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  width: 16rem;
+  height: 2rem;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  background-color: var(--color-day-white);
+  border: 0.0625rem solid var(--color-blue);
+}
+
+.input::placeholder {
+  color: var(--color-day-light-blue);
+}
+
+.icon {
+  position: absolute;
+  right: 0;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+  stroke: var(--color-day-light-blue);
+  fill: var(--color-day-light-blue);
+  cursor: pointer;
+}
+
+.incorrect,
+.disabled {
+  position: relative;
+}
+
+.incorrect .input {
+  background-color: var(--color-day-white);
+  border: 0.0625rem solid var(--color-red);
+}
+
+.disabled .input {
+  background-color: var(--color-day-light-blue);
+  border: 0.0625rem solid var(--color-blue);
+  color: var(--color-day-black);
+}
+
+.button {
+  position: absolute;
+  top: 0;
+  right: 0.25rem;
+  /* bottom: 0.25rem; */
+}
+
+.button .icon {
+  fill: var(--color-day-light-blue);
+  stroke: var(--color-day-light-blue);
+}
+
+.disabled .icon {
+  fill: var(--color-day-black);
+  stroke: var(--color-day-black);
+}

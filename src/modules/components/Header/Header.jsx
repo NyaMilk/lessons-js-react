@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 import styles from "./Header.module.css";
-import { Button } from "../../../shared/components/Button/Button";
-import { MoonIcon, SunIcon } from "../../../shared/components/Icons";
-import { Switcher } from "../../../shared/components/Switcher/Switcher";
+import { Button, Input, Searchbar } from "../../../shared/components";
 
 function Header() {
   const [show, setShow] = useState(false);
@@ -28,28 +26,29 @@ function Header() {
   const themeItems = [
     {
       title: "Светлая",
-      prefixIcon: { icon: SunIcon },
+      prefixIcon: { icon: "sun" },
       transparent: true,
     },
     {
       title: "Темная",
-      prefixIcon: { icon: MoonIcon },
+      prefixIcon: { icon: "moon" },
     },
   ];
 
   return (
     <header className={styles._}>
       <h1>Список заказов</h1>
-      <Button
-        prefixIcon={{ icon: SunIcon }}
-        onClick={showModalHandler}
-        transparent
-      >
+      <Button icon={{ name: "sun" }} transparent onClick={showModalHandler}>
         Светлая тема
       </Button>
-      <Switcher className={dropdownClass} items={themeItems}>
+      {/* <Switcher className={dropdownClass} items={themeItems}>
         Выберите тему
-      </Switcher>
+      </Switcher> */}
+
+      <Input value="test" disabled />
+      <Input value="test" />
+      <Input value="test" label="label" />
+      <Searchbar />
     </header>
   );
 }

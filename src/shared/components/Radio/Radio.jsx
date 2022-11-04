@@ -1,9 +1,6 @@
 import React from "react";
 import classnames from "classnames";
 import styles from "./Radio.module.css";
-import { CheckmarkIcon, VArrowIcon } from "../Icons";
-import { Button } from "../Button/Button";
-import { XMediumIcon } from "../Icons";
 
 export const Radio = ({
   children,
@@ -13,23 +10,23 @@ export const Radio = ({
   hidden,
   onChange,
 }) => {
-  const customRadioClass = classnames(styles._, className);
+  const radioClassName = classnames(styles._, className);
 
-  const inputClass = classnames(styles.input, {
+  const inputClassName = classnames(styles.input, {
     [styles.disabled]: !!disabled,
     [styles.hidden]: !!hidden,
   });
 
   return (
-    <div className={customRadioClass}>
+    <div className={radioClassName}>
       <label className={styles.label}>
         <input
-          className={inputClass}
+          className={inputClassName}
           type="radio"
           name={name}
           value={children}
-          onChange={onChange}
           disabled={disabled}
+          onChange={onChange}
         />
         {children && <span className={styles.text}>{children}</span>}
       </label>

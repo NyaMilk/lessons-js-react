@@ -1,21 +1,20 @@
 import React from "react";
 import classnames from "classnames";
 import styles from "./Button.module.css";
+import { Icon } from "../Icon/Icon";
 
 export const Button = ({
   children,
   className,
   theme = "primary",
   size = "middle",
-  prefixIcon = {},
-  postfixIcon = {},
-  value,
+  icon: { name: iconName, className: iconClass } = {},
   transparent,
   disabled,
   opacity,
   onClick,
 }) => {
-  const buttonClass = classnames(
+  const buttonClassName = classnames(
     styles._,
     className,
     styles[`theme_${theme}`],
@@ -28,21 +27,12 @@ export const Button = ({
     }
   );
 
-  const { icon: PrefixIcon, iconClassName: iconPrifixClassName } = prefixIcon;
-  const { icon: PostfixIcon, iconClassName: iconPostfixClassName } =
-    postfixIcon;
-
-  const iconClass = classnames(
-    styles.icon,
-    iconPrifixClassName,
-    iconPostfixClassName
-  );
+  const iconClassName = classnames(styles.icon, iconClass);
 
   return (
-    <button className={buttonClass} onClick={onClick} value={value}>
-      {PrefixIcon && <PrefixIcon className={iconClass} />}
+    <button className={buttonClassName} onClick={onClick}>
+      {iconName && <Icon className={iconClassName} name={iconName} />}
       {children}
-      {PostfixIcon && <PostfixIcon className={iconClass} />}
     </button>
   );
 };
