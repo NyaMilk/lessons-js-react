@@ -1,47 +1,42 @@
 import React from "react";
 import classnames from "classnames";
 import styles from "./Dropdown.module.css";
-import { LockedIcon, VArrowIcon } from "../Icon/Icon";
+import { Icon } from "../Icon/Icon";
 import { DropdownList } from "../DropdownList/DropdowmList";
+import { Input } from "../Input/Input";
 
 export const Dropdown = ({
-  title: { text, titleClassName },
+  label,
   value,
   type = "multiple",
   items,
-  onClick,
-  onChange,
+  activated,
   checked,
-  active,
   disabled,
+  onChange,
+  onClick,
 }) => {
   const dropdownClassName = classnames(styles._, {
     [styles.disabled]: !!disabled,
   });
 
-  const dropdownListClassName = classnames(styles.modal, {
-    [styles.modalActive]: active,
-  });
-
   return (
     <div>
-      {text && <span className={titleClassName}>{text}</span>}
       <div className={dropdownClassName}>
-        <input
+        <Input
           className={styles.input}
+          label={label}
           type="button"
           value={value}
-          onClick={onClick}
           disabled={disabled}
+          onClick={onClick}
         />
-        {disabled ? (
-          <LockedIcon className={styles.icon} />
-        ) : (
-          <VArrowIcon onClick={onClick} className={styles.icon} />
+        {!disabled && (
+          <Icon name="arrow" className={styles.icon} onClick={onClick} />
         )}
-        {active && (
+        {activated && (
           <DropdownList
-            className={dropdownListClassName}
+            className={styles.modal}
             type={type}
             list={items}
             onChange={onChange}

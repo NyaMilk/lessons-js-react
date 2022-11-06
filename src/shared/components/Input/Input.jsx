@@ -16,6 +16,7 @@ export const Input = ({
   incorrect,
   disabled,
   onChange = noop,
+  onClick = noop,
   onClear,
 }) => {
   const blockClassName = classnames(styles._, {
@@ -40,6 +41,7 @@ export const Input = ({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        onClick={onClick}
       />
       {value && !disabled && onClear && (
         <Button

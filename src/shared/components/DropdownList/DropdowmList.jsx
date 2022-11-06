@@ -8,8 +8,8 @@ export const DropdownList = ({
   className,
   type = "multiple",
   list,
-  onChange,
   checked,
+  onChange,
 }) => {
   const dropdownListClassName = classNames(styles._, className);
   const Type = type === "single" ? Radio : Checkbox;

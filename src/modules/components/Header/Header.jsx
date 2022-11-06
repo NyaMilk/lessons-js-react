@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import classnames from "classnames";
 import styles from "./Header.module.css";
 import { Button, Switcher } from "../../../shared/components";
 
@@ -19,10 +18,6 @@ export const Header = () => {
     setShow(!isShow);
   };
 
-  const dropdownClass = classnames(styles.dropdown, {
-    [styles.dropdownActive]: isShow,
-  });
-
   const themeItems = [
     {
       title: "Светлая",
@@ -41,9 +36,11 @@ export const Header = () => {
       <Button icon={{ name: "sun" }} transparent onClick={modalHandler}>
         Светлая тема
       </Button>
-      <Switcher className={dropdownClass} items={themeItems}>
-        Выберите тему
-      </Switcher>
+      {isShow && (
+        <Switcher className={styles.dropdown} items={themeItems}>
+          Выберите тему
+        </Switcher>
+      )}
     </header>
   );
 };
