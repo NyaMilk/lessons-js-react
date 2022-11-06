@@ -28,7 +28,7 @@ const ICONS = {
   close: XMediumIcon,
 };
 
-export const Icon = ({ className, name }) => {
+export const Icon = ({ name, className }) => {
   const Icon = ICONS[name];
 
   return <Icon className={className} />;

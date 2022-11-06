@@ -1,56 +1,49 @@
 import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 import styles from "./Header.module.css";
-import { Button, Input, Searchbar } from "../../../shared/components";
+import { Button, Switcher } from "../../../shared/components";
 
-function Header() {
-  const [show, setShow] = useState(false);
+export const Header = () => {
+  const [isShow, setShow] = useState(false);
 
   useEffect(() => {
     const onClickOutside = () => setShow(false);
-    if (show) {
+    if (isShow) {
       window.addEventListener("click", onClickOutside);
     }
     return () => window.removeEventListener("click", onClickOutside);
-  }, [show]);
+  }, [isShow]);
 
-  const showModalHandler = (e) => {
+  const modalHandler = (e) => {
     e.stopPropagation();
-    setShow(!show);
+    setShow(!isShow);
   };
 
   const dropdownClass = classnames(styles.dropdown, {
-    [styles.dropdownActive]: show,
+    [styles.dropdownActive]: isShow,
   });
 
   const themeItems = [
     {
       title: "Светлая",
-      prefixIcon: { icon: "sun" },
+      icon: { name: "sun" },
       transparent: true,
     },
     {
       title: "Темная",
-      prefixIcon: { icon: "moon" },
+      icon: { name: "moon" },
     },
   ];
 
   return (
     <header className={styles._}>
       <h1>Список заказов</h1>
-      <Button icon={{ name: "sun" }} transparent onClick={showModalHandler}>
+      <Button icon={{ name: "sun" }} transparent onClick={modalHandler}>
         Светлая тема
       </Button>
-      {/* <Switcher className={dropdownClass} items={themeItems}>
+      <Switcher className={dropdownClass} items={themeItems}>
         Выберите тему
-      </Switcher> */}
-
-      <Input value="test" disabled />
-      <Input value="test" />
-      <Input value="test" label="label" />
-      <Searchbar />
+      </Switcher>
     </header>
   );
-}
-
-export default Header;
+};

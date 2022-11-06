@@ -4,10 +4,10 @@ import styles from "./Switcher.module.css";
 import { Button } from "../Button/Button";
 
 export const Switcher = ({ className, children, items }) => {
-  const customDropdownClass = classnames(styles._, className);
+  const switcherClassName = classnames(styles._, className);
 
   return (
-    <div className={customDropdownClass}>
+    <div className={switcherClassName}>
       {children}
       {items.map(({ title, ...props }) => {
         return (

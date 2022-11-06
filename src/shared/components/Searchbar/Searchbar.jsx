@@ -1,42 +1,16 @@
 import React from "react";
 import classnames from "classnames";
 import styles from "./Searchbar.module.css";
-import { Button } from "../Button/Button";
 import { Icon } from "../Icon/Icon";
+import { Input } from "../Input/Input";
 
-export const Searchbar = ({
-  className,
-  icon: { name: iconName, className: iconClass } = {},
-  name,
-  placeholder,
-  onChange,
-  value,
-  button: buttonProps = {},
-  disabled,
-}) => {
+export const Searchbar = ({ className, ...props }) => {
   const searchbarClassName = classnames(styles._, className);
-
-  const iconClassName = classnames(styles.icon, iconClass);
 
   return (
     <div className={searchbarClassName}>
-      <input
-        className={styles.input}
-        type="text"
-        name={name}
-        value={value}
-        placeholder={placeholder}
-        disabled={disabled}
-        onChange={onChange}
-      />
-      {iconName && <Icon className={iconClass} name={iconClassName} />}
-      {value && (
-        <Button
-          className={styles.button}
-          icon={{ name: "close", className: styles.icon }}
-          {...buttonProps}
-        />
-      )}
+      <Input className={styles.input} {...props} />
+      <Icon name="search" className={styles.icon} />
     </div>
   );
 };
