@@ -5,6 +5,7 @@ import { Icon } from "../Icon/Icon";
 import { DropdownList } from "../DropdownList/DropdowmList";
 import { Input } from "../Input/Input";
 
+// todo
 export const Dropdown = ({
   label,
   value,
@@ -39,7 +40,7 @@ export const Dropdown = ({
             className={styles.modal}
             type={type}
             list={items}
-            onChange={onChange}
+            // onChange={onChange}
             checked={checked}
           />
         )}

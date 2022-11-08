@@ -1,0 +1,15 @@
+._ {
+  width: 18rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.group {
+  display: flex;
+  gap: 0.25rem;
+}

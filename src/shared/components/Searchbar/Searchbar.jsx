@@ -5,11 +5,11 @@ import { Icon } from "../Icon/Icon";
 import { Input } from "../Input/Input";
 
 export const Searchbar = ({ className, ...props }) => {
-  const searchbarClassName = classnames(styles._, className);
+  const inputClassName = classnames(styles.input, className);
 
   return (
-    <div className={searchbarClassName}>
-      <Input className={styles.input} {...props} />
+    <div className={styles._}>
+      <Input className={inputClassName} {...props} />
       <Icon name="search" className={styles.icon} />
     </div>
   );
