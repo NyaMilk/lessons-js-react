@@ -40,7 +40,7 @@ export const Dropdown = ({
             className={styles.modal}
             type={type}
             list={items}
-            // onChange={onChange}
+            onChange={onChange}
             checked={checked}
           />
         )}

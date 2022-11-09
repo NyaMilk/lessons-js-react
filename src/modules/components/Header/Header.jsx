@@ -2,6 +2,18 @@ import React, { useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import { Button, Switcher } from "../../../shared/components";
 
+const themeItems = [
+  {
+    title: "Светлая",
+    icon: { name: "sun" },
+    transparent: true,
+  },
+  {
+    title: "Темная",
+    icon: { name: "moon" },
+  },
+];
+
 export const Header = () => {
   const [isShow, setShow] = useState(false);
 
@@ -13,27 +25,15 @@ export const Header = () => {
     return () => window.removeEventListener("click", onClickOutside);
   }, [isShow]);
 
-  const modalHandler = (e) => {
+  const toggleModal = (e) => {
     e.stopPropagation();
     setShow(!isShow);
   };
 
-  const themeItems = [
-    {
-      title: "Светлая",
-      icon: { name: "sun" },
-      transparent: true,
-    },
-    {
-      title: "Темная",
-      icon: { name: "moon" },
-    },
-  ];
-
   return (
     <header className={styles._}>
       <h1>Список заказов</h1>
-      <Button icon={{ name: "sun" }} transparent onClick={modalHandler}>
+      <Button icon={{ name: "sun" }} transparent onClick={toggleModal}>
         Светлая тема
       </Button>
       {isShow && (
