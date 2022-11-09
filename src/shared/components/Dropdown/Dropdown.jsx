@@ -5,7 +5,6 @@ import { Icon } from "../Icon/Icon";
 import { DropdownList } from "../DropdownList/DropdowmList";
 import { Input } from "../Input/Input";
 
-// todo
 export const Dropdown = ({
   label,
   value,
