@@ -1,0 +1,15 @@
+._ {
+  flex: 1 1 auto;
+  height: 28rem;
+  overflow: auto;
+}
+
+._::-webkit-scrollbar {
+  width: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+._::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.34);
+  border-radius: 0.5rem;
+}

@@ -1,0 +1,5 @@
+._ {
+  display: flex;
+  background-color: var(--color-blue);
+  color: var(--color-day-white);
+}

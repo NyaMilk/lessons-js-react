@@ -1,0 +1,17 @@
+._,
+.list {
+  display: flex;
+}
+
+.list {
+  min-width: 10.75rem;
+}
+
+.end {
+  justify-content: flex-end;
+}
+
+.text {
+  padding: 0.25rem 0.5rem;
+  color: var(--color-blue);
+}

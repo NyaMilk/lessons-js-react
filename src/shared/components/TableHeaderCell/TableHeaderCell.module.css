@@ -1,0 +1,12 @@
+._ {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.75rem 0 0.75rem 0.5rem;
+  box-sizing: border-box;
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+  fill: var(--color-day-white);
+}
