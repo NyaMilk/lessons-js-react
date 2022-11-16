@@ -71,7 +71,6 @@ export const Pagination = ({ size }) => {
             <Button
               size="small"
               transparent={countPages !== currentPage}
-              // opacity={countPages === currentPage || countPages - 1 === currentPage}
               onClick={onChangePage}
             >
               {countPages}

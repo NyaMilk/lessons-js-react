@@ -47,15 +47,6 @@ const STATUSES = {
   },
 };
 
-// const STATUS_ICON = {
-//     new: <StatusIcon name="dot" color="orange" />,
-//     calculation: <StatusIcon name="dot" color="blue" />,
-//     confirmed: <StatusIcon name="dot" color="green" />,
-//     postponed: <StatusIcon name="dot" color="orange" />,
-//     completed: <StatusIcon name="checkmark" color="green" />,
-//     canceled: <StatusIcon name="abort" color="grey" />,
-// }
-
 export const OrderStatus = ({ status }) => {
   const spanClassName = classnames({
     [styles.colorTextGreen]: status === "completed",
