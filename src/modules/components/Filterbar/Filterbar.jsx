@@ -1,51 +1,55 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Dropdown, Searchbar } from "../../../shared/components";
+import { getFilters, getStatuses } from "../../../store/selectors";
+import {
+  clearFilters,
+  setFilter,
+  setStatus,
+} from "../../../store/slices/filterSlice";
 import { Filter } from "../Filter/Filter";
 import { InputFilter } from "../InputFilter/InputFilter";
+import { STATUSES } from "../OrderStatus/OrderStatus";
 import styles from "./Filterbar.module.css";
 
-const initialFiltersState = {
-  search: "",
-  dateFrom: "",
-  dateTo: "",
-  amountFrom: "",
-  amountTo: "",
-};
-
-const dropdownItems = [
-  "Новый",
-  "Рассчет",
-  "Подтвержден",
-  "Отложен",
-  "Выполнен",
-  "Отменен",
-];
-
 export const Filterbar = () => {
-  const [value, setValue] = useState(initialFiltersState);
-  const [isChecked, setChecked] = useState(true);
   const [isShowFilter, setShowFilter] = useState(false);
   const [isShowDropdown, setShowDropdown] = useState(false);
-  const [dropdownValues, setDropdownValues] = useState([]);
+  const filters = useSelector(getFilters);
+  const dispatch = useDispatch();
+  const statuses = useSelector(getStatuses);
+  const statusesItems = Object.values(STATUSES).reduce(
+    (statuses, { value, langRu }) =>
+      Object.assign(statuses, { [value]: langRu }),
+    {}
+  );
 
-  const inputChangeHandler = ({ target: { name, value: newValue } }) => {
-    setValue({ ...value, [name]: newValue });
+  const inputChangeHandler = ({ target: { name, value } }) => {
+    dispatch(setFilter({ name, value }));
   };
-  const clearInputHandler = (name) => () => setValue({ ...value, [name]: "" });
+
+  const clearInputHandler = (name) => () =>
+    dispatch(setFilter({ name, value: "" }));
+
   const clearFiltersHandler = () => {
-    setValue(initialFiltersState);
-    setDropdownValues([]);
-    setChecked(!isChecked);
+    dispatch(clearFilters());
+    setShowDropdown(false);
   };
 
-  const dropdownChangeHandler = ({ target: { name, checked } }) => {
-    if (checked) {
-      setDropdownValues([...dropdownValues, name]);
-    } else {
-      setDropdownValues([...dropdownValues.filter((value) => value !== name)]);
-    }
+  const statusChangeHandler = ({ target: { name, checked } }) => {
+    dispatch(
+      setStatus(
+        checked
+          ? [...statuses, name]
+          : statuses.filter((value) => value !== name)
+      )
+    );
   };
-  const defaultValue = dropdownValues.length === 0 ? "Любой" : dropdownValues;
+
+  const getCheckedValues = (statuses) => {
+    const values = statuses.map((value) => statusesItems[value]);
+    return values.length > 0 ? values : "Любой";
+  };
 
   const toggleFilterModal = (e) => {
     e.stopPropagation();
@@ -66,7 +70,7 @@ export const Filterbar = () => {
             className={styles.input}
             name="search"
             placeholder="Номер заказа или ФИО"
-            value={value.search}
+            value={filters.search}
             onChange={inputChangeHandler}
             onClear={clearInputHandler("search")}
           />
@@ -90,7 +94,7 @@ export const Filterbar = () => {
                 prefix="c"
                 name="dateFrom"
                 placeholder="dd.mm.yyyy"
-                value={value.dateFrom}
+                value={filters.dateFrom}
                 onChange={inputChangeHandler}
                 onClear={clearInputHandler("dateFrom")}
               />
@@ -100,7 +104,7 @@ export const Filterbar = () => {
                 prefix="по"
                 name="dateTo"
                 placeholder="dd.mm.yyyy"
-                value={value.dateTo}
+                value={filters.dateTo}
                 onChange={inputChangeHandler}
                 onClear={clearInputHandler("dateTo")}
               />
@@ -109,11 +113,11 @@ export const Filterbar = () => {
 
           <Dropdown
             label="Статус заказа"
-            items={dropdownItems}
-            value={defaultValue}
-            onChange={dropdownChangeHandler}
+            items={statusesItems}
+            checked={statuses}
+            value={getCheckedValues(statuses)}
+            onChange={statusChangeHandler}
             onClick={toggleDropdownModal}
-            checked={isChecked}
             activated={isShowDropdown}
           />
 
@@ -124,7 +128,7 @@ export const Filterbar = () => {
                 prefix="от"
                 name="amountFrom"
                 placeholder="&#8381;"
-                value={value.amountFrom}
+                value={filters.amountFrom}
                 onChange={inputChangeHandler}
                 onClear={clearInputHandler("amountFrom")}
               />
@@ -134,7 +138,7 @@ export const Filterbar = () => {
                 prefix="по"
                 name="amountTo"
                 placeholder="&#8381;"
-                value={value.amountTo}
+                value={filters.amountTo}
                 onChange={inputChangeHandler}
                 onClear={clearInputHandler("amountTo")}
               />

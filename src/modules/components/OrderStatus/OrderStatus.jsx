@@ -14,7 +14,7 @@ const StatusIcon = ({ name, color }) => {
   return <Icon name={name} className={iconClassName} />;
 };
 
-const STATUSES = {
+export const STATUSES = {
   new: {
     value: "new",
     langRu: "Новый",

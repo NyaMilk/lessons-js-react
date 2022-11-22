@@ -26,3 +26,11 @@
 .cell_name {
   width: 48.25rem;
 }
+
+.text {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-grey);
+}

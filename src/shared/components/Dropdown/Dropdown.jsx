@@ -11,7 +11,7 @@ export const Dropdown = ({
   type = "multiple",
   items,
   activated,
-  checked,
+  checked = [],
   disabled,
   onChange,
   onClick,
