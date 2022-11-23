@@ -13,8 +13,11 @@ const filtersSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
-    setFilter(state, { payload: { name, value } }) {
-      state[name] = value;
+    setSearch(state, { payload }) {
+      state.search = payload;
+    },
+    setFilters(state, { payload: { filters } }) {
+      Object.keys(filters).map((filter) => (state[filter] = filters[filter]));
     },
     setStatus(state, { payload }) {
       state.statuses = payload;
@@ -25,5 +28,6 @@ const filtersSlice = createSlice({
   },
 });
 
-export const { setFilter, setStatus, clearFilters } = filtersSlice.actions;
+export const { setSearch, setFilters, setStatus, clearFilters } =
+  filtersSlice.actions;
 export default filtersSlice.reducer;

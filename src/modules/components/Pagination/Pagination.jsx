@@ -1,14 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import classnames from "classnames";
-import { Button } from "../../../shared/components";
+import { Button, DropdownWithInput } from "../../../shared/components";
 import styles from "./Pagination.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentPage } from "../../../store/selectors";
 import { setCurrentPage } from "../../../store/slices/recordSlice";
 
+const ENTER_KEY_CODE = 13;
+
 export const Pagination = ({ pageCount }) => {
   const dispatch = useDispatch();
   const currentPage = useSelector(getCurrentPage);
+  const [isShow, setShow] = useState(false);
+  const [page, setPage] = useState("");
+
+  const toggleModal = (e) => {
+    e.stopPropagation();
+    setShow(!isShow);
+  };
+
+  const changePageHandler = ({ target: { value } }) => {
+    setPage(value);
+  };
+
+  const clearPageHandler = () => {
+    setPage("");
+  };
+
+  const applySelectPageHandler = ({ keyCode }) => {
+    if (keyCode === ENTER_KEY_CODE && page <= pageCount) {
+      dispatch(setCurrentPage(Number(page)));
+      setShow(false);
+      clearPageHandler();
+    }
+  };
 
   const onChangePage = ({ target: { textContent } }) => {
     const page = Number(textContent);
@@ -16,6 +41,8 @@ export const Pagination = ({ pageCount }) => {
     if (currentPage !== page) {
       dispatch(setCurrentPage(page));
     }
+
+    setShow(false);
   };
 
   let firstPage, lastPage;
@@ -83,9 +110,19 @@ export const Pagination = ({ pageCount }) => {
           </>
         )}
       </div>
-      <Button size="small" transparent>
+      <Button size="small" transparent onClick={toggleModal}>
         #
       </Button>
+      {isShow && (
+        <DropdownWithInput
+          label="Номер страницы"
+          placeholder="Введите номер"
+          value={page}
+          onChange={changePageHandler}
+          onClear={clearPageHandler}
+          onKeyDown={applySelectPageHandler}
+        />
+      )}
     </div>
   );
 };

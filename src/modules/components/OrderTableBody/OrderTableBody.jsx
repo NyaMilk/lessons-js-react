@@ -9,8 +9,6 @@ import {
 import { OrderStatus } from "../OrderStatus/OrderStatus";
 
 export const OrderTableBody = ({ records = [] }) => {
-  // const records = useSelector(getRecords);
-
   return (
     <TableBody>
       {records.length === 0 && (

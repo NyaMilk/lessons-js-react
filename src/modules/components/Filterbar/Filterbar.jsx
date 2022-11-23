@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Button, Dropdown, Searchbar } from "../../../shared/components";
-import { getFilters, getStatuses } from "../../../store/selectors";
 import {
   clearFilters,
-  setFilter,
+  setFilters,
+  setSearch,
   setStatus,
 } from "../../../store/slices/filterSlice";
 import { Filter } from "../Filter/Filter";
@@ -13,11 +13,19 @@ import { STATUSES } from "../OrderStatus/OrderStatus";
 import styles from "./Filterbar.module.css";
 
 export const Filterbar = () => {
+  const initialState = {
+    search: "",
+    dateFrom: "",
+    dateTo: "",
+    amountFrom: "",
+    amountTo: "",
+  };
+
+  const [filters, setStateFilters] = useState(initialState);
+  const [statuses, setStateStatuses] = useState([]);
   const [isShowFilter, setShowFilter] = useState(false);
   const [isShowDropdown, setShowDropdown] = useState(false);
-  const filters = useSelector(getFilters);
   const dispatch = useDispatch();
-  const statuses = useSelector(getStatuses);
   const statusesItems = Object.values(STATUSES).reduce(
     (statuses, { value, langRu }) =>
       Object.assign(statuses, { [value]: langRu }),
@@ -25,30 +33,43 @@ export const Filterbar = () => {
   );
 
   const inputChangeHandler = ({ target: { name, value } }) => {
-    dispatch(setFilter({ name, value }));
+    if (name === "search") {
+      dispatch(setSearch(value));
+    }
+
+    setStateFilters({ ...filters, [name]: value });
   };
 
-  const clearInputHandler = (name) => () =>
-    dispatch(setFilter({ name, value: "" }));
+  const clearInputHandler = (name) => () => {
+    if (name === "search") {
+      dispatch(setSearch(""));
+    }
+
+    setStateFilters({ ...filters, [name]: "" });
+  };
 
   const clearFiltersHandler = () => {
     dispatch(clearFilters());
+    setStateFilters(initialState);
+    setStateStatuses([]);
     setShowDropdown(false);
   };
 
   const statusChangeHandler = ({ target: { name, checked } }) => {
-    dispatch(
-      setStatus(
-        checked
-          ? [...statuses, name]
-          : statuses.filter((value) => value !== name)
-      )
+    setStateStatuses(
+      checked ? [...statuses, name] : statuses.filter((value) => value !== name)
     );
   };
 
   const getCheckedValues = (statuses) => {
     const values = statuses.map((value) => statusesItems[value]);
     return values.length > 0 ? values : "Любой";
+  };
+
+  const applyFiltersHandler = () => {
+    dispatch(setFilters({ filters }));
+    dispatch(setStatus(statuses));
+    setShowDropdown(false);
   };
 
   const toggleFilterModal = (e) => {
@@ -144,6 +165,10 @@ export const Filterbar = () => {
               />
             }
           />
+
+          <Button transparent onClick={applyFiltersHandler}>
+            Применить
+          </Button>
         </div>
       )}
     </section>
