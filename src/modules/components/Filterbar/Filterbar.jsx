@@ -140,6 +140,8 @@ export const Filterbar = () => {
               />
             }
           />
+
+          <Button transparent>Применить</Button>
         </div>
       )}
     </section>
