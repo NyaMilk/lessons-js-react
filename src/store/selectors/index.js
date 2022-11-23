@@ -1,4 +1,4 @@
-import recordsMock from "../../assets/mock/orders.json";
+import recordsMock from "../../assets/mock/orders2.json";
 import { chunk } from "lodash/array";
 import {
   checkDateRange,
@@ -15,10 +15,20 @@ import {
 } from "../../shared/utils/checkIncludesValue";
 
 const RECORDS_ON_PAGE = 30;
+export const SORT_TYPE = {
+  date: "date",
+  status: "status",
+  count: "count",
+  amount: "amount",
+};
 
 export const getFilters = (state) => state.filters;
 export const getStatuses = (state) => state.filters.statuses;
+export const getRecords = (state) => state.records.records;
 export const getCurrentPage = (state) => state.records.currentPage;
+export const getPageCount = (state) => state.records.pageCount;
+export const getSortDirection = (state) => state.records.sortDirection;
+export const getSortColumn = (state) => state.records.sortColumn;
 
 const getFilteredRecords = ({ filters }, records) => {
   const checkSearch = (id, name) => {
@@ -47,8 +57,32 @@ const getFilteredRecords = ({ filters }, records) => {
   );
 };
 
-export const getRecords = (state) => {
-  const filterRecord = getFilteredRecords(state, recordsMock);
+const sortRecords = (orders, sortDirection, sortColumn) => {
+  const direction = sortDirection === "asc" ? -1 : 1;
 
-  return chunk(filterRecord, RECORDS_ON_PAGE);
+  return orders.sort((a, b) => {
+    let valueFirst = a[sortColumn];
+    let valueSecond = b[sortColumn];
+
+    if (sortColumn === "date") {
+      valueFirst = parseDateTimeFromString(valueFirst);
+      valueSecond = parseDateTimeFromString(valueSecond);
+    }
+
+    return valueFirst < valueSecond ? direction : -direction;
+  });
+};
+
+export const getRecordsWithFilters = (state) => {
+  const filteredRecord = getFilteredRecords(state, recordsMock);
+  const sortDirection = getSortDirection(state);
+  const sortColumn = getSortColumn(state);
+  const sortedRecords = sortRecords(filteredRecord, sortDirection, sortColumn);
+  const records = chunk(sortedRecords, RECORDS_ON_PAGE);
+  const currentPage = getCurrentPage(state);
+
+  return {
+    records: records[currentPage - 1],
+    pageCount: records.length,
+  };
 };

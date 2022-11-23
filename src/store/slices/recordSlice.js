@@ -2,8 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
   records: [],
-  sort: "dateDesc",
-  currentPage: 0,
+  sortColumn: "date",
+  sortDirection: "desc",
+  currentPage: 1,
+  pageCount: 1,
 };
 
 const recordSlice = createSlice({
@@ -13,14 +15,26 @@ const recordSlice = createSlice({
     setRecords(state, { payload }) {
       state.records = payload;
     },
-    setSort(state, { payload }) {
-      state.sort = payload;
+    setSortColumn(state, { payload }) {
+      state.sortColumn = payload;
+    },
+    setSortDirection(state, { payload }) {
+      state.sortDirection = payload;
     },
     setCurrentPage(state, { payload }) {
       state.currentPage = payload;
     },
+    setPageCount(state, { payload }) {
+      state.pageCount = payload;
+    },
   },
 });
 
-export const { setRecords, setSort, setCurrentPage } = recordSlice.actions;
+export const {
+  setRecords,
+  setSortColumn,
+  setSortDirection,
+  setCurrentPage,
+  setPageCount,
+} = recordSlice.actions;
 export default recordSlice.reducer;

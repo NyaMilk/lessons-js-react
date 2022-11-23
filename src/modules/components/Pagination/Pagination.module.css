@@ -11,6 +11,10 @@
   justify-content: flex-end;
 }
 
+.middle {
+  justify-content: center;
+}
+
 .text {
   padding: 0.25rem 0.5rem;
   color: var(--color-blue);
