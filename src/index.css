@@ -24,6 +24,7 @@
 }
 
 body {
+  min-width: 75rem;
   font-family: "Ubuntu", sans-serif;
   font-size: 0.8125rem;
   color: var(--color-day-black);
