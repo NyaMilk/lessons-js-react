@@ -36,6 +36,7 @@ export const Filterbar = () => {
     setValue(initialFiltersState);
     setDropdownValues([]);
     setChecked(!isChecked);
+    setShowDropdown(false);
   };
 
   const dropdownChangeHandler = ({ target: { name, checked } }) => {
@@ -70,12 +71,18 @@ export const Filterbar = () => {
             onChange={inputChangeHandler}
             onClear={clearInputHandler("search")}
           />
-          <Button icon={{ name: "filter" }} onClick={toggleFilterModal}>
+          <Button
+            icon={{ name: "filter" }}
+            onClick={toggleFilterModal}
+            transparent={!isShowFilter}
+          >
             Фильтры
           </Button>
-          <Button onClick={clearFiltersHandler} transparent>
-            Сбросить фильтры
-          </Button>
+          {isShowFilter && (
+            <Button onClick={clearFiltersHandler} transparent>
+              Сбросить фильтры
+            </Button>
+          )}
         </div>
         <Button icon={{ name: "refresh" }} transparent>
           Загрузка
