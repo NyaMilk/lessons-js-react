@@ -1,4 +1,4 @@
-import recordsMock from "../../assets/mock/orders2.json";
+import recordsMock from "../../assets/mock/orders.json";
 import { chunk } from "lodash/array";
 import {
   checkDateRange,
