@@ -4,6 +4,7 @@ import styles from "./Checkbox.module.css";
 import { Icon } from "../Icon/Icon";
 
 export const Checkbox = ({
+  id,
   children,
   className,
   name,
@@ -23,6 +24,7 @@ export const Checkbox = ({
     <div className={checkboxClassName}>
       <label className={styles.label}>
         <input
+          id={id}
           className={inputClassName}
           type="checkbox"
           name={name ?? children}

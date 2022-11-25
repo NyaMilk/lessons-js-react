@@ -17,7 +17,7 @@ export const OrderTable = () => {
 
   return (
     <Table>
-      <OrderTableHeader />
+      <OrderTableHeader records={records} />
       <OrderTableBody records={records} />
       <OrderTableFooter pageCount={pageCount} />
     </Table>

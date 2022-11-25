@@ -6,6 +6,7 @@ export const initialState = {
   sortDirection: "desc",
   currentPage: 1,
   pageCount: 1,
+  selectedRecordsIds: [],
 };
 
 const recordSlice = createSlice({
@@ -27,6 +28,9 @@ const recordSlice = createSlice({
     setPageCount(state, { payload }) {
       state.pageCount = payload;
     },
+    setSelectedRecordsIds(state, { payload }) {
+      state.selectedRecordsIds = payload;
+    },
   },
 });
 
@@ -36,5 +40,6 @@ export const {
   setSortDirection,
   setCurrentPage,
   setPageCount,
+  setSelectedRecordsIds,
 } = recordSlice.actions;
 export default recordSlice.reducer;
