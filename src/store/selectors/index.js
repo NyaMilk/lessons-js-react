@@ -1,4 +1,4 @@
-import recordsMock from "../../assets/mock/orders.json";
+import recordsMock from "../../assets/mock/orders2.json";
 import { chunk } from "lodash/array";
 import {
   checkDateRange,
@@ -64,9 +64,14 @@ const sortRecords = (orders, sortDirection, sortColumn) => {
     let valueFirst = a[sortColumn];
     let valueSecond = b[sortColumn];
 
-    if (sortColumn === "date") {
+    if (sortColumn === SORT_TYPE.date) {
       valueFirst = parseDateTimeFromString(valueFirst);
       valueSecond = parseDateTimeFromString(valueSecond);
+    }
+
+    if (sortColumn === SORT_TYPE.amount || sortColumn === SORT_TYPE.count) {
+      valueFirst = parseInt(valueFirst);
+      valueSecond = parseInt(valueSecond);
     }
 
     return valueFirst < valueSecond ? direction : -direction;
