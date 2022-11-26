@@ -4,12 +4,17 @@ import { OrderTableHeader } from "../OrderTableHeader/OrderTableHeader";
 import { OrderTableBody } from "../OrderTableBody/OrderTableBody";
 import { OrderTableFooter } from "../OrderTableFooter/OrderTableFooter";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecordsWithFilters } from "../../../store/selectors";
-import { setCurrentPage } from "../../../store/slices/recordSlice";
+import { getRecordsWithFilters, loadRecords } from "../../../store/selectors";
+import { setCurrentPage, setRecords } from "../../../store/slices/recordSlice";
 
 export const OrderTable = () => {
-  const { records, pageCount } = useSelector(getRecordsWithFilters);
   const dispatch = useDispatch();
+  const { records, pageCount } = useSelector(getRecordsWithFilters);
+
+  useEffect(() => {
+    const records = loadRecords();
+    dispatch(setRecords(records));
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(setCurrentPage(1));

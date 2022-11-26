@@ -35,20 +35,22 @@ export const OrderTableHeader = ({ records = [] }) => {
   };
 
   const checkboxChangeHandler = ({ target: { checked } }) => {
-    checked
-      ? dispatch(setSelectedRecordsIds(records.map(({ id }) => id)))
-      : dispatch(
-          setSelectedRecordsIds(
-            records.filter(({ id }) => !selectedRecordsIds.includes(id))
-          )
-        );
+    dispatch(
+      setSelectedRecordsIds(
+        checked
+          ? records.map(({ id }) => id)
+          : records.filter(({ id }) => !selectedRecordsIds.includes(id))
+      )
+    );
   };
 
   return (
     <TableHeader>
       <TableHeaderCell className={styles.cell_withCheckbox}>
         <Checkbox
-          checked={selectedRecordsIds.length === records.length}
+          checked={
+            records.length > 0 && selectedRecordsIds.length === records.length
+          }
           onChange={checkboxChangeHandler}
         />
       </TableHeaderCell>

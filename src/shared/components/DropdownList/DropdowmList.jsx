@@ -8,7 +8,9 @@ export const DropdownList = ({
   className,
   type = "multiple",
   list,
+  name,
   checked,
+  hidden,
   onChange,
 }) => {
   const dropdownListClassName = classNames(styles._, className);
@@ -17,12 +19,16 @@ export const DropdownList = ({
   return (
     <div className={dropdownListClassName}>
       {Object.entries(list).map(([key, value]) => {
+        const isChecked = type === "single" ? false : checked.includes(key);
+
         return (
           <Type
             key={key}
-            name={key}
+            name={name ?? key}
+            value={key}
             className={styles.item}
-            checked={checked.includes(key)}
+            checked={isChecked}
+            hidden={hidden}
             onChange={onChange}
           >
             {value}

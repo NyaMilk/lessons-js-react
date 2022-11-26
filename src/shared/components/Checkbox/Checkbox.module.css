@@ -42,7 +42,3 @@
 .disabled {
   border: 0.0625rem solid var(--color-day-black);
 }
-
-.hidden {
-  display: none;
-}

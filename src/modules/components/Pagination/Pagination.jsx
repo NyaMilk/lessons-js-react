@@ -11,12 +11,12 @@ const ENTER_KEY_CODE = 13;
 export const Pagination = ({ pageCount }) => {
   const dispatch = useDispatch();
   const currentPage = useSelector(getCurrentPage);
-  const [isShow, setShow] = useState(false);
+  const [isShowModal, setShowModal] = useState(false);
   const [page, setPage] = useState("");
 
   const toggleModal = (e) => {
     e.stopPropagation();
-    setShow(!isShow);
+    setShowModal(!isShowModal);
   };
 
   const changePageHandler = ({ target: { value } }) => {
@@ -30,7 +30,7 @@ export const Pagination = ({ pageCount }) => {
   const applySelectPageHandler = ({ keyCode }) => {
     if (keyCode === ENTER_KEY_CODE && page <= pageCount) {
       dispatch(setCurrentPage(Number(page)));
-      setShow(false);
+      setShowModal(false);
       clearPageHandler();
     }
   };
@@ -42,7 +42,7 @@ export const Pagination = ({ pageCount }) => {
       dispatch(setCurrentPage(page));
     }
 
-    setShow(false);
+    setShowModal(false);
   };
 
   let firstPage, lastPage;
@@ -113,8 +113,9 @@ export const Pagination = ({ pageCount }) => {
       <Button size="small" transparent onClick={toggleModal}>
         #
       </Button>
-      {isShow && (
+      {isShowModal && (
         <DropdownWithInput
+          className={styles.modal}
           label="Номер страницы"
           placeholder="Введите номер"
           value={page}

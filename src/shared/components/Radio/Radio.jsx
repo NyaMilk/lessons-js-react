@@ -6,6 +6,7 @@ export const Radio = ({
   children,
   className,
   name = "custom-radio",
+  value,
   disabled,
   hidden,
   onChange,
@@ -24,8 +25,9 @@ export const Radio = ({
           className={inputClassName}
           type="radio"
           name={name}
-          value={children}
+          value={value}
           disabled={disabled}
+          hidden={hidden}
           onChange={onChange}
         />
         {children && <span className={styles.text}>{children}</span>}

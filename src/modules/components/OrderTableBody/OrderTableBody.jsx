@@ -15,7 +15,6 @@ export const OrderTableBody = ({ records = [] }) => {
   const dispatch = useDispatch();
   const selectedRecordsIds = useSelector(getSelectedRecordsIds);
 
-  // todo добавить сброс при смене страницы
   const checkboxChangeHandler = ({ target: { id, checked } }) => {
     dispatch(
       setSelectedRecordsIds(
@@ -35,13 +34,14 @@ export const OrderTableBody = ({ records = [] }) => {
         records.map(({ id, date, status, count, amount, name }) => {
           count = count ? count : "–";
           amount = amount ? Number(amount).toLocaleString() + " ₽" : "–";
+          const isChecked = selectedRecordsIds.includes(id);
 
           return (
-            <TableRow key={id}>
+            <TableRow key={id} selected={isChecked}>
               <TableCell className={styles.cell_withCheckbox}>
                 <Checkbox
                   id={id}
-                  checked={selectedRecordsIds.includes(id)}
+                  checked={isChecked}
                   onChange={checkboxChangeHandler}
                 />
               </TableCell>

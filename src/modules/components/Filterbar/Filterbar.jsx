@@ -9,7 +9,7 @@ import {
 } from "../../../store/slices/filterSlice";
 import { Filter } from "../Filter/Filter";
 import { InputFilter } from "../InputFilter/InputFilter";
-import { STATUSES } from "../OrderStatus/OrderStatus";
+import { statusesLangRu } from "../OrderStatus/OrderStatus";
 import styles from "./Filterbar.module.css";
 
 export const Filterbar = () => {
@@ -26,11 +26,6 @@ export const Filterbar = () => {
   const [isShowFilter, setShowFilter] = useState(false);
   const [isShowDropdown, setShowDropdown] = useState(false);
   const dispatch = useDispatch();
-  const statusesItems = Object.values(STATUSES).reduce(
-    (statuses, { value, langRu }) =>
-      Object.assign(statuses, { [value]: langRu }),
-    {}
-  );
 
   const inputChangeHandler = ({ target: { name, value } }) => {
     if (name === "search") {
@@ -62,7 +57,7 @@ export const Filterbar = () => {
   };
 
   const getCheckedValues = (statuses) => {
-    const values = statuses.map((value) => statusesItems[value]);
+    const values = statuses.map((value) => statusesLangRu[value]);
     return values.length > 0 ? values : "Любой";
   };
 
@@ -140,7 +135,7 @@ export const Filterbar = () => {
 
           <Dropdown
             label="Статус заказа"
-            items={statusesItems}
+            items={statusesLangRu}
             checked={statuses}
             value={getCheckedValues(statuses)}
             onChange={statusChangeHandler}

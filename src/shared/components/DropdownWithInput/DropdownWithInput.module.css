@@ -4,9 +4,6 @@
   width: 10rem;
   height: 5.5rem;
   min-height: 2rem;
-  position: absolute;
-  right: 0.5rem;
-  bottom: 3rem;
   border-radius: 0.5rem;
   padding: 1rem;
   background-color: var(--color-day-white);

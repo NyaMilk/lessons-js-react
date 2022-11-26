@@ -15,19 +15,19 @@ const themeItems = [
 ];
 
 export const Header = () => {
-  const [isShow, setShow] = useState(false);
+  const [isShowModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const onClickOutside = () => setShow(false);
-    if (isShow) {
+    const onClickOutside = () => setShowModal(false);
+    if (isShowModal) {
       window.addEventListener("click", onClickOutside);
     }
     return () => window.removeEventListener("click", onClickOutside);
-  }, [isShow]);
+  }, [isShowModal]);
 
   const toggleModal = (e) => {
     e.stopPropagation();
-    setShow(!isShow);
+    setShowModal(!isShowModal);
   };
 
   return (
@@ -36,7 +36,7 @@ export const Header = () => {
       <Button icon={{ name: "sun" }} transparent onClick={toggleModal}>
         Светлая тема
       </Button>
-      {isShow && (
+      {isShowModal && (
         <Switcher className={styles.dropdown} items={themeItems}>
           Выберите тему
         </Switcher>

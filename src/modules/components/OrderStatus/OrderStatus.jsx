@@ -47,6 +47,11 @@ export const STATUSES = {
   },
 };
 
+export const statusesLangRu = Object.values(STATUSES).reduce(
+  (statuses, { value, langRu }) => Object.assign(statuses, { [value]: langRu }),
+  {}
+);
+
 export const OrderStatus = ({ status }) => {
   const spanClassName = classnames({
     [styles.colorTextGreen]: status === "completed",

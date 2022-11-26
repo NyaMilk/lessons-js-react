@@ -1,11 +1,14 @@
 import React from "react";
+import classNames from "classnames";
 import styles from "./DropdownWithInput.module.css";
 import { Input } from "../Input/Input";
 
-export const DropdownWithInput = ({ ...props }) => {
+export const DropdownWithInput = ({ className, ...propsInput }) => {
+  const dropdownClassName = classNames(styles._, className);
+
   return (
-    <div className={styles._}>
-      <Input className={styles.input} {...props} />
+    <div className={dropdownClassName}>
+      <Input className={styles.input} {...propsInput} />
     </div>
   );
 };

@@ -31,6 +31,7 @@ export const Checkbox = ({
           checked={checked}
           value={children}
           disabled={disabled}
+          hidden={hidden}
           onChange={onChange}
         />
         <Icon name="checkmark" className={styles.icon} />
