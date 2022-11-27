@@ -11,6 +11,7 @@ import { ReactComponent as SearchIcon } from "../../../assets/icons/search.svg";
 import { ReactComponent as SunIcon } from "../../../assets/icons/sun.svg";
 import { ReactComponent as VArrowIcon } from "../../../assets/icons/v_arrow.svg";
 import { ReactComponent as XMediumIcon } from "../../../assets/icons/x-medium.svg";
+import { ReactComponent as XLargeIcon } from "../../../assets/icons/x-large.svg";
 
 const ICONS = {
   abort: AbortIcon,
@@ -26,6 +27,7 @@ const ICONS = {
   sun: SunIcon,
   arrow: VArrowIcon,
   close: XMediumIcon,
+  closeLarge: XLargeIcon,
 };
 
 export const Icon = ({ name, className, onClick }) => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./OrderTableBody.module.css";
 import {
   Checkbox,
@@ -10,10 +10,13 @@ import { OrderStatus } from "../OrderStatus/OrderStatus";
 import { setSelectedRecordsIds } from "../../../store/slices/recordSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getSelectedRecordsIds } from "../../../store/selectors";
+import { OrderModal } from "../OrderModal/OrderModal";
+import { setRecord } from "../../../store/slices/formSlice";
 
 export const OrderTableBody = ({ records = [] }) => {
   const dispatch = useDispatch();
   const selectedRecordsIds = useSelector(getSelectedRecordsIds);
+  const [isShowModal, setShowModal] = useState(false);
 
   const checkboxChangeHandler = ({ target: { id, checked } }) => {
     dispatch(
@@ -23,6 +26,17 @@ export const OrderTableBody = ({ records = [] }) => {
           : selectedRecordsIds.filter((value) => value !== id)
       )
     );
+  };
+  const getRecordsById = (id) => {
+    return records.filter((record) => record.id === id)[0];
+  };
+
+  const openRecordFormHandler = (e) => {
+    // подумать...
+    if (e.target.tagName === "DIV") {
+      dispatch(setRecord(getRecordsById(e.currentTarget.id)));
+      setShowModal(true);
+    }
   };
 
   return (
@@ -37,7 +51,12 @@ export const OrderTableBody = ({ records = [] }) => {
           const isChecked = selectedRecordsIds.includes(id);
 
           return (
-            <TableRow key={id} selected={isChecked}>
+            <TableRow
+              key={id}
+              id={id}
+              selected={isChecked}
+              onClick={openRecordFormHandler}
+            >
               <TableCell className={styles.cell_withCheckbox}>
                 <Checkbox
                   id={id}
@@ -56,6 +75,7 @@ export const OrderTableBody = ({ records = [] }) => {
             </TableRow>
           );
         })}
+      {isShowModal && <OrderModal setShowModal={setShowModal} />}
     </TableBody>
   );
 };

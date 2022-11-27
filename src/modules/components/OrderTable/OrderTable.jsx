@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import styles from "./OrderTable.module.css";
 import { Table } from "../../../shared/components";
 import { OrderTableHeader } from "../OrderTableHeader/OrderTableHeader";
 import { OrderTableBody } from "../OrderTableBody/OrderTableBody";
@@ -21,7 +22,7 @@ export const OrderTable = () => {
   }, [pageCount, dispatch]);
 
   return (
-    <Table>
+    <Table className={styles._}>
       <OrderTableHeader records={records} />
       <OrderTableBody records={records} />
       <OrderTableFooter pageCount={pageCount} />

@@ -134,6 +134,7 @@ export const Filterbar = () => {
           />
 
           <Dropdown
+            className={styles.dropdown}
             label="Статус заказа"
             items={statusesLangRu}
             checked={statuses}

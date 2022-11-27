@@ -6,17 +6,20 @@ import { DropdownList } from "../DropdownList/DropdowmList";
 import { Input } from "../Input/Input";
 
 export const Dropdown = ({
+  className,
   label,
   value,
   type = "multiple",
+  name,
   items,
   activated,
   checked = [],
   disabled,
+  hidden,
   onChange,
   onClick,
 }) => {
-  const dropdownClassName = classnames(styles._, {
+  const dropdownClassName = classnames(styles._, className, {
     [styles.disabled]: !!disabled,
   });
 
@@ -39,8 +42,10 @@ export const Dropdown = ({
             className={styles.modal}
             type={type}
             list={items}
-            onChange={onChange}
+            name={name}
             checked={checked}
+            hidden={hidden}
+            onChange={onChange}
           />
         )}
       </div>

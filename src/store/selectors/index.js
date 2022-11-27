@@ -31,6 +31,7 @@ export const getSortDirection = (state) => state.records.sortDirection;
 export const getSortColumn = (state) => state.records.sortColumn;
 export const getSelectedRecordsIds = (state) =>
   state.records.selectedRecordsIds;
+export const getRecord = (state) => state.form.record;
 
 const getFilteredRecords = ({ filters }, records) => {
   const checkSearch = (id, name) => {
