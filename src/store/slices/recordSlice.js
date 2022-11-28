@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { setFilters, setSearch } from "./filterSlice";
+import { setRecord } from "./formSlice";
 
 export const initialState = {
   records: [],
@@ -55,6 +56,9 @@ const recordSlice = createSlice({
         state.selectedRecordsIds = [];
       })
       .addCase(setFilters, (state) => {
+        state.selectedRecordsIds = [];
+      })
+      .addCase(setRecord, (state) => {
         state.selectedRecordsIds = [];
       });
   },

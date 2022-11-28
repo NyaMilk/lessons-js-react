@@ -19,7 +19,8 @@ export const DropdownList = ({
   return (
     <div className={dropdownListClassName}>
       {Object.entries(list).map(([key, value]) => {
-        const isChecked = type === "single" ? false : checked.includes(key);
+        const isChecked =
+          type === "single" ? checked === key : checked.includes(key);
 
         return (
           <Type

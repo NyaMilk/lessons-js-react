@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import classnames from "classnames";
 import styles from "./OrderModal.module.css";
 import {
   Button,
@@ -14,16 +13,27 @@ import {
   TableRow,
 } from "../../../shared/components";
 import { statusesLangRu } from "../OrderStatus/OrderStatus";
-import { useSelector } from "react-redux";
-import { getRecord } from "../../../store/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { getRecord, SORT_TYPE } from "../../../store/selectors";
+import { updateRecord } from "../../../store/slices/recordSlice";
 
 const ESC_KEY_CODE = 27;
+const CONFIRME_CODE = "000";
+const LOYALTY_LEVEL = {
+  newbie: "Новичек",
+  expert: "Эксперт",
+};
 
 export const OrderModal = ({ setShowModal }) => {
   const [isShowDropdown, setShowDropdown] = useState(false);
-  const { id, date, status, amount, name, order } = useSelector(getRecord);
-  const amountFormat =
-    amount.length > 0 ? Number(amount).toLocaleString() + " ₽" : "0";
+  const [formData, setFormData] = useState(useSelector(getRecord));
+  const amount =
+    formData.amount.length > 0
+      ? Number(formData.amount).toLocaleString() + " ₽"
+      : "0";
+  const [confirmeCode, setConfirmeCode] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const onKeyDown = ({ keyCode }) => {
@@ -39,14 +49,47 @@ export const OrderModal = ({ setShowModal }) => {
     setShowModal(false);
   };
 
-  const [formName, setFormName] = useState(name);
-  const inputNameChangeHandler = ({ target: { value } }) => {
-    setFormName(value);
+  const changeNameHandler = ({ target: { value } }) => {
+    setFormData({ ...formData, name: value });
   };
-  const clearNameChangeHandler = ({ target: { value } }) => {
-    setFormName("");
+
+  const clearNameHandler = () => {
+    setFormData({ ...formData, name: "" });
   };
-  const [codeConfirmation, setCodeConfirmation] = useState("");
+
+  const statusChangeHandler = ({ target: { value } }) => {
+    setFormData({ ...formData, status: value });
+    setShowDropdown(false);
+  };
+
+  const changeConfirmeCodeHandler = ({ target: { value } }) => {
+    setConfirmeCode(value);
+  };
+
+  const clearConfirmeCodeHandler = () => {
+    setConfirmeCode("");
+  };
+
+  const saveNewFormDataHandler = () => {
+    if (confirmeCode !== CONFIRME_CODE) {
+      setErrorMessage("Некорректный код подтверждения!");
+    } else if (formData.name.length === 0) {
+      setErrorMessage("Не все необходимые поля заполнены!");
+    } else {
+      setErrorMessage("");
+      dispatch(
+        updateRecord({ id: formData.id, key: "name", value: formData.name })
+      );
+      dispatch(
+        updateRecord({
+          id: formData.id,
+          key: SORT_TYPE.status,
+          value: formData.status,
+        })
+      );
+      setShowModal(false);
+    }
+  };
 
   const toggleDropdownModal = (e) => {
     e.stopPropagation();
@@ -57,7 +100,7 @@ export const OrderModal = ({ setShowModal }) => {
     <div className={styles._}>
       <div className={styles.form}>
         <div className={styles.header}>
-          <span className={styles.title}>Заявка #{id}</span>
+          <span className={styles.title}>Заявка #{formData.id}</span>
           <Button
             icon={{ name: "closeLarge", className: styles.icon }}
             onClick={closeModalHandler}
@@ -67,14 +110,14 @@ export const OrderModal = ({ setShowModal }) => {
 
         <div className={styles.main}>
           <div className={styles.mainGroup}>
-            <Input label="Дата и время заказа" value={date} disabled />
+            <Input label="Дата и время заказа" value={formData.date} disabled />
             <Input
               label="ФИО покупателя"
               placeholder="Введите ФИО покупателя"
-              value={formName}
-              incorrect={formName.length === 0}
-              onChange={inputNameChangeHandler}
-              onClear={clearNameChangeHandler}
+              value={formData.name}
+              incorrect={formData.name.length === 0}
+              onChange={changeNameHandler}
+              onClear={clearNameHandler}
             />
 
             <Table className={styles.table}>
@@ -90,7 +133,7 @@ export const OrderModal = ({ setShowModal }) => {
                 </TableHeaderCell>
               </TableHeader>
               <TableBody>
-                {order.map(({ id, name, price }) => {
+                {formData.order.map(({ id, name, price }) => {
                   return (
                     <TableRow key={id}>
                       <TableCell className={styles.cell_code}>{id}</TableCell>
@@ -103,24 +146,24 @@ export const OrderModal = ({ setShowModal }) => {
                 })}
               </TableBody>
               <TableFooter className={styles.tableFooter}>
-                <span>Итоговая сумма: {amountFormat}</span>
+                <span>Итоговая сумма: {amount}</span>
               </TableFooter>
             </Table>
 
             <Input
               label="Уровень лояльности"
-              // value={date}
+              value={LOYALTY_LEVEL[formData.loyalty]}
               disabled
             />
 
             <Dropdown
               label="Статус заказа"
-              value={"New"}
               type="single"
               name="statusForm"
               items={statusesLangRu}
-              // checked={statuses}
-              // onChange={statusChangeHandler}
+              checked={formData.status}
+              value={statusesLangRu[formData.status]}
+              onChange={statusChangeHandler}
               activated={isShowDropdown}
               hidden
               onClick={toggleDropdownModal}
@@ -128,14 +171,23 @@ export const OrderModal = ({ setShowModal }) => {
 
             <Input
               label="Код подтверждения"
-              placeholder="Введите цифровой код"
-              // value={date}
+              placeholder="Введите цифровой код подтверждения"
+              value={confirmeCode}
+              incorrect={confirmeCode.length === 0}
+              onChange={changeConfirmeCodeHandler}
+              onClear={clearConfirmeCodeHandler}
             />
           </div>
         </div>
 
         <div className={styles.footer}>
-          <Button icon={{ name: "checkmark", className: styles.icon }}>
+          {errorMessage && (
+            <span className={styles.textWarning}>{errorMessage}</span>
+          )}
+          <Button
+            icon={{ name: "checkmark", className: styles.icon }}
+            onClick={saveNewFormDataHandler}
+          >
             Сохранить
           </Button>
         </div>

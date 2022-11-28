@@ -17,6 +17,7 @@ export const OrderTableBody = ({ records = [] }) => {
   const dispatch = useDispatch();
   const selectedRecordsIds = useSelector(getSelectedRecordsIds);
   const [isShowModal, setShowModal] = useState(false);
+  const [openRecordId, setOpenRecordId] = useState("");
 
   const checkboxChangeHandler = ({ target: { id, checked } }) => {
     dispatch(
@@ -28,13 +29,18 @@ export const OrderTableBody = ({ records = [] }) => {
     );
   };
   const getRecordsById = (id) => {
-    return records.filter((record) => record.id === id)[0];
+    return records.find((record) => record.id === id);
   };
 
-  const openRecordFormHandler = (e) => {
+  const openRecordFormHandler = ({
+    target: { tagName },
+    currentTarget: { id },
+  }) => {
     // подумать...
-    if (e.target.tagName === "DIV") {
-      dispatch(setRecord(getRecordsById(e.currentTarget.id)));
+    console.log(tagName);
+    if (tagName === "DIV") {
+      dispatch(setRecord(getRecordsById(id)));
+      setOpenRecordId(id);
       setShowModal(true);
     }
   };
@@ -54,7 +60,7 @@ export const OrderTableBody = ({ records = [] }) => {
             <TableRow
               key={id}
               id={id}
-              selected={isChecked}
+              selected={isChecked || (openRecordId === id && isShowModal)}
               onClick={openRecordFormHandler}
             >
               <TableCell className={styles.cell_withCheckbox}>
