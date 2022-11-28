@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./OrderModal.module.css";
 import {
   Button,
   Dropdown,
   Input,
+  Switcher,
   Table,
   TableBody,
   TableCell,
@@ -25,29 +26,17 @@ const LOYALTY_LEVEL = {
 };
 
 export const OrderModal = ({ setShowModal }) => {
-  const [isShowDropdown, setShowDropdown] = useState(false);
-  const [formData, setFormData] = useState(useSelector(getRecord));
+  const record = useSelector(getRecord);
+  const [formData, setFormData] = useState(record);
+  const currentFormData = record;
   const amount =
     formData.amount.length > 0
       ? Number(formData.amount).toLocaleString() + " ₽"
-      : "0";
+      : "0 ₽";
   const [confirmeCode, setConfirmeCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isShowDropdown, setShowDropdown] = useState(false);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    const onKeyDown = ({ keyCode }) => {
-      if (keyCode === ESC_KEY_CODE) {
-        setShowModal(false);
-      }
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [setShowModal]);
-
-  const closeModalHandler = () => {
-    setShowModal(false);
-  };
 
   const changeNameHandler = ({ target: { value } }) => {
     setFormData({ ...formData, name: value });
@@ -96,8 +85,57 @@ export const OrderModal = ({ setShowModal }) => {
     setShowDropdown(!isShowDropdown);
   };
 
+  const applyCloseModalForm = () => {
+    setShowModal(false);
+  };
+
+  const stayInModalForm = () => {
+    setChangeFormData(false);
+  };
+
+  const [isChangeFormData, setChangeFormData] = useState(false);
+
+  const closeModalHandler = useCallback(() => {
+    const isChangeFormData =
+      formData.name !== currentFormData.name ||
+      formData.status !== currentFormData.status;
+
+    if (isChangeFormData) {
+      setChangeFormData(true);
+    } else {
+      setShowModal(false);
+    }
+  }, [formData, currentFormData, setShowModal]);
+
+  useEffect(() => {
+    const onKeyDown = ({ keyCode }) => {
+      if (keyCode === ESC_KEY_CODE) {
+        closeModalHandler();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [closeModalHandler]);
+
+  const closeModalItems = [
+    {
+      title: "Остаться",
+      transparent: true,
+      onClick: stayInModalForm,
+    },
+    {
+      title: "Закрыть",
+      onClick: applyCloseModalForm,
+    },
+  ];
+
   return (
     <div className={styles._}>
+      {isChangeFormData && (
+        <Switcher className={styles.closeApplyModal} items={closeModalItems}>
+          Имеются несохраненные изменения
+        </Switcher>
+      )}
       <div className={styles.form}>
         <div className={styles.header}>
           <span className={styles.title}>Заявка #{formData.id}</span>

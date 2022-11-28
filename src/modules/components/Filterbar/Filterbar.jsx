@@ -12,15 +12,23 @@ import { InputFilter } from "../InputFilter/InputFilter";
 import { statusesLangRu } from "../OrderStatus/OrderStatus";
 import styles from "./Filterbar.module.css";
 
-export const Filterbar = () => {
-  const initialState = {
-    search: "",
-    dateFrom: "",
-    dateTo: "",
-    amountFrom: "",
-    amountTo: "",
-  };
+const FILTER_FIELDS = {
+  search: "search",
+  dateFrom: "dateFrom",
+  dateTo: "dateTo",
+  amountFrom: "amountFrom",
+  amountTo: "amountTo",
+};
 
+const initialState = {
+  search: "",
+  dateFrom: "",
+  dateTo: "",
+  amountFrom: "",
+  amountTo: "",
+};
+
+export const Filterbar = () => {
   const [filters, setStateFilters] = useState(initialState);
   const [statuses, setStateStatuses] = useState([]);
   const [isShowFilter, setShowFilter] = useState(false);
@@ -88,7 +96,7 @@ export const Filterbar = () => {
             placeholder="Номер заказа или ФИО"
             value={filters.search}
             onChange={inputChangeHandler}
-            onClear={clearInputHandler("search")}
+            onClear={clearInputHandler(FILTER_FIELDS.search)}
           />
           <Button
             icon={{ name: "filter" }}
@@ -114,21 +122,21 @@ export const Filterbar = () => {
             from={
               <InputFilter
                 prefix="c"
-                name="dateFrom"
+                name={FILTER_FIELDS.dateFrom}
                 placeholder="dd.mm.yyyy"
                 value={filters.dateFrom}
                 onChange={inputChangeHandler}
-                onClear={clearInputHandler("dateFrom")}
+                onClear={clearInputHandler(FILTER_FIELDS.dateFrom)}
               />
             }
             to={
               <InputFilter
                 prefix="по"
-                name="dateTo"
+                name={FILTER_FIELDS.dateTo}
                 placeholder="dd.mm.yyyy"
                 value={filters.dateTo}
                 onChange={inputChangeHandler}
-                onClear={clearInputHandler("dateTo")}
+                onClear={clearInputHandler(FILTER_FIELDS.dateTo)}
               />
             }
           />
@@ -149,21 +157,21 @@ export const Filterbar = () => {
             from={
               <InputFilter
                 prefix="от"
-                name="amountFrom"
+                name={FILTER_FIELDS.amountFrom}
                 placeholder="&#8381;"
                 value={filters.amountFrom}
                 onChange={inputChangeHandler}
-                onClear={clearInputHandler("amountFrom")}
+                onClear={clearInputHandler(FILTER_FIELDS.amountFrom)}
               />
             }
             to={
               <InputFilter
                 prefix="по"
-                name="amountTo"
+                name={FILTER_FIELDS.amountTo}
                 placeholder="&#8381;"
                 value={filters.amountTo}
                 onChange={inputChangeHandler}
-                onClear={clearInputHandler("amountTo")}
+                onClear={clearInputHandler(FILTER_FIELDS.amountTo)}
               />
             }
           />

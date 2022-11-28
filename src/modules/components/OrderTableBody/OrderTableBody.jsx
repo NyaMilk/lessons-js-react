@@ -36,8 +36,6 @@ export const OrderTableBody = ({ records = [] }) => {
     target: { tagName },
     currentTarget: { id },
   }) => {
-    // подумать...
-    console.log(tagName);
     if (tagName === "DIV") {
       dispatch(setRecord(getRecordsById(id)));
       setOpenRecordId(id);
