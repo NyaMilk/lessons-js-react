@@ -19,6 +19,11 @@ import {
   setSortDirection,
 } from "../../../store/slices/recordSlice";
 
+const SORT_DIRECTION = {
+  asc: "asc",
+  desc: "desc",
+};
+
 export const OrderTableHeader = ({ records = [] }) => {
   const dispatch = useDispatch();
   const sortColumn = useSelector(getSortColumn);
@@ -31,7 +36,13 @@ export const OrderTableHeader = ({ records = [] }) => {
 
   const sortCellHandler = (column) => () => {
     dispatch(setSortColumn(column));
-    dispatch(setSortDirection(sortDirection === "asc" ? "desc" : "asc"));
+    dispatch(
+      setSortDirection(
+        sortDirection === SORT_DIRECTION.asc
+          ? SORT_DIRECTION.desc
+          : SORT_DIRECTION.asc
+      )
+    );
   };
 
   const checkboxChangeHandler = ({ target: { checked } }) => {
@@ -58,7 +69,7 @@ export const OrderTableHeader = ({ records = [] }) => {
       <TableHeaderCell
         className={styles.cell_date}
         sorted={sortColumn === SORT_TYPE.date}
-        direction={sortDirection}
+        direction={sortColumn === SORT_TYPE.date && sortDirection}
         onCLick={sortCellHandler(SORT_TYPE.date)}
       >
         Дата
@@ -66,7 +77,7 @@ export const OrderTableHeader = ({ records = [] }) => {
       <TableHeaderCell
         className={styles.cell_status}
         sorted={sortColumn === SORT_TYPE.status}
-        direction={sortDirection}
+        direction={sortColumn === SORT_TYPE.status && sortDirection}
         onCLick={sortCellHandler(SORT_TYPE.status)}
       >
         Статус
@@ -74,7 +85,7 @@ export const OrderTableHeader = ({ records = [] }) => {
       <TableHeaderCell
         className={styles.cell_count}
         sorted={sortColumn === SORT_TYPE.count}
-        direction={sortDirection}
+        direction={sortColumn === SORT_TYPE.count && sortDirection}
         onCLick={sortCellHandler(SORT_TYPE.count)}
       >
         Позиций
@@ -82,7 +93,7 @@ export const OrderTableHeader = ({ records = [] }) => {
       <TableHeaderCell
         className={styles.cell_amount}
         sorted={sortColumn === SORT_TYPE.amount}
-        direction={sortDirection}
+        direction={sortColumn === SORT_TYPE.amount && sortDirection}
         onCLick={sortCellHandler(SORT_TYPE.amount)}
       >
         Cумма
