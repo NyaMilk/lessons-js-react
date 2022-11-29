@@ -2,18 +2,6 @@ import React, { useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import { Button, Switcher } from "../../../shared/components";
 
-const themeItems = [
-  {
-    title: "Светлая",
-    icon: { name: "sun" },
-    transparent: true,
-  },
-  {
-    title: "Темная",
-    icon: { name: "moon" },
-  },
-];
-
 export const Header = () => {
   const [isShowModal, setShowModal] = useState(false);
 
@@ -29,6 +17,18 @@ export const Header = () => {
     e.stopPropagation();
     setShowModal(!isShowModal);
   };
+
+  const themeItems = [
+    {
+      title: "Светлая",
+      icon: { name: "sun" },
+      transparent: true,
+    },
+    {
+      title: "Темная",
+      icon: { name: "moon" },
+    },
+  ];
 
   return (
     <header className={styles._}>

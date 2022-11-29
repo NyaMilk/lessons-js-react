@@ -15,7 +15,7 @@ import {
 } from "../../../shared/components";
 import { statusesLangRu } from "../OrderStatus/OrderStatus";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecord, SORT_TYPE } from "../../../store/selectors";
+import { getRecord } from "../../../store/selectors";
 import { updateRecord } from "../../../store/slices/recordSlice";
 
 const ESC_KEY_CODE = 27;
@@ -72,7 +72,7 @@ export const OrderModal = ({ setShowModal }) => {
       dispatch(
         updateRecord({
           id: formData.id,
-          key: SORT_TYPE.status,
+          key: "status",
           value: formData.status,
         })
       );
