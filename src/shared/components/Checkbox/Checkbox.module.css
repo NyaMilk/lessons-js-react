@@ -14,8 +14,8 @@
   height: 1rem;
   border-radius: 0.125rem;
   box-sizing: border-box;
-  background-color: var(--color-day-white);
-  border: 0.0625rem solid var(--color-day-light-blue);
+  background-color: var(--background-color-main);
+  border: 0.0625rem solid var(--color-secondary);
 }
 
 .input:checked {
@@ -36,9 +36,9 @@
   left: 0;
   width: 1rem;
   opacity: 0;
-  fill: var(--color-day-white);
+  fill: var(--background-color-main);
 }
 
 .disabled {
-  border: 0.0625rem solid var(--color-day-black);
+  border: 0.0625rem solid var(--color-main);
 }

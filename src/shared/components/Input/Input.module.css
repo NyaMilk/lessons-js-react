@@ -13,12 +13,13 @@
   padding: 0.5rem 2rem 0.5rem 0.5rem;
   border-radius: 0.25rem;
   box-sizing: border-box;
-  background-color: var(--color-day-white);
+  background-color: var(--background-color-main);
   border: 0.0625rem solid var(--color-blue);
+  color: var(--color-main);
 }
 
 .input::placeholder {
-  color: var(--color-day-light-blue);
+  color: var(--color-secondary);
 }
 
 .icon {
@@ -28,8 +29,8 @@
   width: 2rem;
   height: 2rem;
   padding: 0.5rem;
-  stroke: var(--color-day-light-blue);
-  fill: var(--color-day-light-blue);
+  stroke: var(--color-secondary);
+  fill: var(--color-secondary);
   cursor: pointer;
 }
 
@@ -40,8 +41,8 @@
 }
 
 .button .icon {
-  stroke: var(--color-day-light-blue);
-  fill: var(--color-day-light-blue);
+  stroke: var(--color-secondary);
+  fill: var(--color-secondary);
 }
 
 .incorrect,
@@ -50,19 +51,19 @@
 }
 
 .incorrect .input {
-  background-color: var(--color-day-white);
+  background-color: var(--background-color-main);
   border: 0.0625rem solid var(--color-red);
 }
 
 .disabled .input {
-  background-color: var(--color-day-light-blue);
+  background-color: var(--color-secondary);
   border: 0.0625rem solid var(--color-blue);
-  color: var(--color-day-black);
+  color: var(--color-main);
 }
 
 .button .icon {
-  fill: var(--color-day-light-blue);
-  stroke: var(--color-day-light-blue);
+  fill: var(--color-secondary);
+  stroke: var(--color-secondary);
 }
 
 .disabled .icon {

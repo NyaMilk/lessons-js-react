@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import { Button, Switcher } from "../../../shared/components";
 
+const THEMES = {
+  light: "light",
+  dark: "dark",
+};
+
 export const Header = () => {
   const [isShowModal, setShowModal] = useState(false);
 
@@ -18,15 +23,29 @@ export const Header = () => {
     setShowModal(!isShowModal);
   };
 
+  const [currentTheme, setCurrentTheme] = useState(THEMES.light);
+
+  useEffect(() => {
+    document.documentElement.className = THEMES.light;
+  }, []);
+
+  const changeTheme = (theme) => () => {
+    setCurrentTheme(theme);
+    document.documentElement.className = theme;
+  };
+
   const themeItems = [
     {
       title: "Светлая",
       icon: { name: "sun" },
-      transparent: true,
+      transparent: currentTheme !== THEMES.light,
+      onClick: changeTheme(THEMES.light),
     },
     {
       title: "Темная",
       icon: { name: "moon" },
+      transparent: currentTheme !== THEMES.dark,
+      onClick: changeTheme(THEMES.dark),
     },
   ];
 
