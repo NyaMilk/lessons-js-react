@@ -4,7 +4,7 @@ import logger from "redux-logger";
 
 const store = configureStore({
   reducer: reducers,
-  middleware: [logger],
+  // middleware: [logger],
 });
 
 export default store;

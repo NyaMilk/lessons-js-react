@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Header.module.css";
 import { Button, Switcher } from "../../../shared/components";
+import { useClickOutside } from "../utils/useClickOutside";
 
 const THEMES = {
   light: "light",
@@ -8,15 +9,12 @@ const THEMES = {
 };
 
 export const Header = () => {
-  const [isShowModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    const onClickOutside = () => setShowModal(false);
-    if (isShowModal) {
-      window.addEventListener("click", onClickOutside);
-    }
-    return () => window.removeEventListener("click", onClickOutside);
-  }, [isShowModal]);
+  const toggleModalRef = useRef();
+  const {
+    ref: modalRef,
+    isShow: isShowModal,
+    setShow: setShowModal,
+  } = useClickOutside(false, toggleModalRef);
 
   const toggleModal = (e) => {
     e.stopPropagation();
@@ -32,6 +30,7 @@ export const Header = () => {
   const changeTheme = (theme) => () => {
     setCurrentTheme(theme);
     document.documentElement.className = theme;
+    setShowModal(false);
   };
 
   const themeItems = [
@@ -52,11 +51,16 @@ export const Header = () => {
   return (
     <header className={styles._}>
       <h1>Список заказов</h1>
-      <Button icon={{ name: "sun" }} transparent onClick={toggleModal}>
+      <Button
+        ref={toggleModalRef}
+        icon={{ name: "sun" }}
+        transparent
+        onClick={toggleModal}
+      >
         Светлая тема
       </Button>
       {isShowModal && (
-        <Switcher className={styles.dropdown} items={themeItems}>
+        <Switcher ref={modalRef} className={styles.dropdown} items={themeItems}>
           Выберите тему
         </Switcher>
       )}

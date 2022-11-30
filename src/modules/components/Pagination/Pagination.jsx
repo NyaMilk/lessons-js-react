@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import classnames from "classnames";
 import { Button, DropdownWithInput } from "../../../shared/components";
 import styles from "./Pagination.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentPage } from "../../../store/selectors";
 import { setCurrentPage } from "../../../store/slices/recordSlice";
+import { useClickOutside } from "../utils/useClickOutside";
 
 const ENTER_KEY_CODE = 13;
 
 export const Pagination = ({ pageCount }) => {
   const dispatch = useDispatch();
   const currentPage = useSelector(getCurrentPage);
-  const [isShowModal, setShowModal] = useState(false);
   const [page, setPage] = useState("");
+
+  const toggleModalRef = useRef();
+  const {
+    ref: modalRef,
+    isShow: isShowModal,
+    setShow: setShowModal,
+  } = useClickOutside(false, toggleModalRef);
 
   const toggleModal = (e) => {
     e.stopPropagation();
@@ -110,11 +117,17 @@ export const Pagination = ({ pageCount }) => {
           </>
         )}
       </div>
-      <Button size="small" transparent onClick={toggleModal}>
+      <Button
+        ref={toggleModalRef}
+        size="small"
+        transparent
+        onClick={toggleModal}
+      >
         #
       </Button>
       {isShowModal && (
         <DropdownWithInput
+          ref={modalRef}
           className={styles.modal}
           label="Номер страницы"
           placeholder="Введите номер"

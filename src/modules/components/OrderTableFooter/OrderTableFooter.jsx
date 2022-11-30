@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Switcher, TableFooter } from "../../../shared/components";
 import { DropdownList } from "../../../shared/components/DropdownList/DropdowmList";
@@ -6,25 +6,20 @@ import { getSelectedRecordsIds, SORT_TYPE } from "../../../store/selectors";
 import { deleteRecords, updateRecord } from "../../../store/slices/recordSlice";
 import { statusesLangRu } from "../OrderStatus/OrderStatus";
 import { Pagination } from "../Pagination/Pagination";
+import { useClickOutside } from "../utils/useClickOutside";
 import styles from "./OrderTableFooter.module.css";
 
 export const OrderTableFooter = ({ pageCount }) => {
   const dispatch = useDispatch();
-  const [isShowDeleteModal, setShowDeleteModal] = useState(false);
-  const [isShowChangeStatusModal, setShowChangeStatusModal] = useState(false);
   const selectedRecordsIds = useSelector(getSelectedRecordsIds);
   const selectedRecordsCount = selectedRecordsIds.length;
 
-  useEffect(() => {
-    const onClickOutside = () => setShowDeleteModal(false);
-    if (isShowDeleteModal) {
-      window.addEventListener("click", onClickOutside);
-    }
-    return () => window.removeEventListener("click", onClickOutside);
-  }, [isShowDeleteModal]);
-
   const deleteSelectedRecordsHandler = () => {
     dispatch(deleteRecords());
+    setShowDeleteModal(false);
+  };
+
+  const closeDeleteModalHandler = () => {
     setShowDeleteModal(false);
   };
 
@@ -43,17 +38,32 @@ export const OrderTableFooter = ({ pageCount }) => {
     },
     {
       title: "Отмена",
+      onClick: closeDeleteModalHandler,
     },
   ];
 
-  const toggleDeleteRecordModal = (e) => {
-    e.stopPropagation();
-    setShowDeleteModal(!isShowDeleteModal);
-  };
+  const toggleChangeStatusRef = useRef();
+  const toggleDeleteRef = useRef();
+
+  const {
+    ref: changeStatus,
+    isShow: isShowChangeStatusModal,
+    setShow: setShowChangeStatusModal,
+  } = useClickOutside(false, toggleChangeStatusRef);
+  const {
+    ref: deleteRef,
+    isShow: isShowDeleteModal,
+    setShow: setShowDeleteModal,
+  } = useClickOutside(false, toggleDeleteRef);
 
   const toggleChangeStatusModal = (e) => {
     e.stopPropagation();
     setShowChangeStatusModal(!isShowChangeStatusModal);
+  };
+
+  const toggleDeleteRecordModal = (e) => {
+    e.stopPropagation();
+    setShowDeleteModal(!isShowDeleteModal);
   };
 
   return (
@@ -65,6 +75,7 @@ export const OrderTableFooter = ({ pageCount }) => {
               Выбрано записей: {selectedRecordsCount}
             </span>
             <Button
+              ref={toggleChangeStatusRef}
               size="small"
               icon={{ name: "pencil" }}
               onClick={toggleChangeStatusModal}
@@ -73,6 +84,7 @@ export const OrderTableFooter = ({ pageCount }) => {
             </Button>
             {isShowChangeStatusModal && (
               <DropdownList
+                ref={changeStatus}
                 className={styles.changeStatusModal}
                 type="single"
                 name="status"
@@ -83,6 +95,7 @@ export const OrderTableFooter = ({ pageCount }) => {
             )}
 
             <Button
+              ref={toggleDeleteRef}
               theme="secondary"
               size="small"
               icon={{ name: "bin" }}
@@ -91,7 +104,11 @@ export const OrderTableFooter = ({ pageCount }) => {
               Удалить
             </Button>
             {isShowDeleteModal && (
-              <Switcher className={styles.deleteModal} items={deleteModalItems}>
+              <Switcher
+                ref={deleteRef}
+                className={styles.deleteModal}
+                items={deleteModalItems}
+              >
                 Удалить {selectedRecordsCount} записей?
               </Switcher>
             )}

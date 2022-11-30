@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createRef, forwardRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Dropdown, Searchbar } from "../../../shared/components";
 import {
@@ -28,7 +28,7 @@ const initialState = {
   amountTo: "",
 };
 
-export const Filterbar = () => {
+export const Filterbar = forwardRef(() => {
   const [filters, setStateFilters] = useState(initialState);
   const [statuses, setStateStatuses] = useState([]);
   const [isShowFilter, setShowFilter] = useState(false);
@@ -86,6 +86,21 @@ export const Filterbar = () => {
     setShowDropdown(!isShowDropdown);
   };
 
+  const ref = createRef();
+
+  useEffect(() => {
+    const onClickOutside = (e) => {
+      if (ref && !ref.current.contains(e.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    if (isShowDropdown) {
+      window.addEventListener("mousedown", onClickOutside);
+    }
+    return () => window.removeEventListener("mousedown", onClickOutside);
+  }, [isShowDropdown, ref]);
+
   return (
     <section>
       <div className={styles.searchbar}>
@@ -142,6 +157,7 @@ export const Filterbar = () => {
           />
 
           <Dropdown
+            ref={ref}
             className={styles.dropdown}
             label="Статус заказа"
             items={statusesLangRu}
@@ -183,4 +199,4 @@ export const Filterbar = () => {
       )}
     </section>
   );
-};
+});
