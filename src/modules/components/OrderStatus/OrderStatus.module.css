@@ -1,0 +1,28 @@
+._ {
+  width: 1rem;
+  height: 1rem;
+}
+
+.colorOrange {
+  fill: var(--color-orange);
+}
+
+.colorGreen {
+  fill: var(--color-green);
+}
+
+.colorBlue {
+  fill: var(--color-blue);
+}
+
+.colorGrey {
+  stroke: var(--color-grey);
+}
+
+.colorTextGreen {
+  color: var(--color-green);
+}
+
+.colorTextGrey {
+  color: var(--color-grey);
+}

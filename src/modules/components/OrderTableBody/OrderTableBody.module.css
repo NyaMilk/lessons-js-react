@@ -1,0 +1,28 @@
+.cell_withCheckbox {
+  min-width: 2.5rem;
+  padding: 0.75rem 0 0.75rem 1rem;
+}
+
+.cell_number {
+  min-width: 6.75rem;
+}
+
+.cell_date {
+  min-width: 11rem;
+}
+
+.cell_status {
+  min-width: 11rem;
+}
+
+.cell_count {
+  min-width: 6rem;
+}
+
+.cell_amount {
+  min-width: 8rem;
+}
+
+.cell_name {
+  width: 100%;
+}

@@ -1,0 +1,16 @@
+.group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 23.625rem;
+}
+
+.text {
+  color: var(--color-blue);
+}
+
+.modal {
+  position: absolute;
+  top: -6.8rem;
+  left: 19.25rem;
+}

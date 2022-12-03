@@ -1,0 +1,9 @@
+._ {
+  display: flex;
+  justify-content: space-between;
+  height: 2.5rem;
+  position: relative;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  background-color: var(--color-day-white-blue);
+}
