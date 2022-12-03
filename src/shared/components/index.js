@@ -6,6 +6,7 @@ export { Input } from "./Input/Input";
 export { Searchbar } from "./Searchbar/Searchbar";
 export { Switcher } from "./Switcher/Switcher";
 export { Dropdown } from "./Dropdown/Dropdown";
+export { DropdownWithInput } from "./DropdownWithInput/DropdownWithInput";
 export { Table } from "./Table/Table";
 export { TableHeader } from "./TableHeader/TableHeader";
 export { TableBody } from "./TableBody/TableBody";

@@ -4,7 +4,7 @@ import { Pagination } from "../Pagination/Pagination";
 import styles from "./OrderTableFooter.module.css";
 
 export const OrderTableFooter = ({
-  recordsCount,
+  pageCount,
   selectedRecords = 0,
   deleteRecords = 0,
 }) => {
@@ -46,7 +46,7 @@ export const OrderTableFooter = ({
           Удалить {deleteRecords} записей?
         </Switcher>
       )}
-      <Pagination size={recordsCount} />
+      <Pagination pageCount={pageCount} />
     </TableFooter>
   );
 };

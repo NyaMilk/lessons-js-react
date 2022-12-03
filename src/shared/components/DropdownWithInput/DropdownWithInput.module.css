@@ -2,13 +2,22 @@
   display: flex;
   flex-direction: column;
   width: 10rem;
-  height: 7rem;
+  height: 5.5rem;
   min-height: 2rem;
-  padding: 1rem;
+  position: absolute;
+  right: 0.5rem;
+  bottom: 3rem;
   border-radius: 0.5rem;
+  padding: 1rem;
   background-color: var(--color-day-white);
   box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1),
     0 0.25rem 0.5rem rgba(0, 0, 0, 0.1), 0 0.125rem 0.125rem rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  gap: 0.625rem;
+}
+
+.input {
+  width: 8rem;
+  height: 2rem;
+  padding: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

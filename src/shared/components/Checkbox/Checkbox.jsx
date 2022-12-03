@@ -6,6 +6,8 @@ import { Icon } from "../Icon/Icon";
 export const Checkbox = ({
   children,
   className,
+  name,
+  checked,
   disabled,
   hidden,
   onChange,
@@ -23,7 +25,8 @@ export const Checkbox = ({
         <input
           className={inputClassName}
           type="checkbox"
-          name={children}
+          name={name ?? children}
+          checked={checked}
           value={children}
           disabled={disabled}
           onChange={onChange}

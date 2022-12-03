@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import classNames from "classnames";
 import styles from "./DropdownList.module.css";
 import { Radio } from "../Radio/Radio";
@@ -15,16 +15,20 @@ export const DropdownList = ({
   const Type = type === "single" ? Radio : Checkbox;
 
   return (
-    <Fragment key={checked}>
-      <div className={dropdownListClassName}>
-        {list.map((text, item) => {
-          return (
-            <Type key={item} className={styles.item} onChange={onChange}>
-              {text}
-            </Type>
-          );
-        })}
-      </div>
-    </Fragment>
+    <div className={dropdownListClassName}>
+      {Object.entries(list).map(([key, value]) => {
+        return (
+          <Type
+            key={key}
+            name={key}
+            className={styles.item}
+            checked={checked.includes(key)}
+            onChange={onChange}
+          >
+            {value}
+          </Type>
+        );
+      })}
+    </div>
   );
 };
