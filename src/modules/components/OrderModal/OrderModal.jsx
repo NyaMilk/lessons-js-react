@@ -24,15 +24,20 @@ const LOYALTY_LEVEL = {
   newbie: "Новичек",
   expert: "Эксперт",
 };
+const ERROR_MESSAGE = {
+  confirmCodeInvalid: "Некорректный код подтверждения!",
+  emptyInputName: "Не все необходимые поля заполнены!",
+};
 
 export const OrderModal = ({ setShowModal }) => {
   const record = useSelector(getRecord);
   const [formData, setFormData] = useState(record);
   const currentFormData = record;
-  const amount =
-    formData.amount.length > 0
-      ? Number(formData.amount).toLocaleString() + " ₽"
-      : "0 ₽";
+  const amount = new Intl.NumberFormat("ru-RU", {
+    style: "currency",
+    currency: "RUB",
+    minimumFractionDigits: 0,
+  }).format(formData.amount);
   const [confirmeCode, setConfirmeCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isShowDropdown, setShowDropdown] = useState(false);
@@ -61,9 +66,9 @@ export const OrderModal = ({ setShowModal }) => {
 
   const saveNewFormDataHandler = () => {
     if (confirmeCode !== CONFIRME_CODE) {
-      setErrorMessage("Некорректный код подтверждения!");
+      setErrorMessage(ERROR_MESSAGE.confirmCodeInvalid);
     } else if (formData.name.length === 0) {
-      setErrorMessage("Не все необходимые поля заполнены!");
+      setErrorMessage(ERROR_MESSAGE.emptyInputName);
     } else {
       setErrorMessage("");
       dispatch(
@@ -227,7 +232,7 @@ export const OrderModal = ({ setShowModal }) => {
               label="Код подтверждения"
               placeholder="Введите цифровой код подтверждения"
               value={confirmeCode}
-              incorrect={confirmeCode.length === 0}
+              incorrect={errorMessage === ERROR_MESSAGE.confirmCodeInvalid}
               onChange={changeConfirmeCodeHandler}
               onClear={clearConfirmeCodeHandler}
             />

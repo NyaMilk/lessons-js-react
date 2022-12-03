@@ -24,36 +24,36 @@ export const Input = ({
     [styles.incorrect]: !!incorrect,
     [styles.disabled]: !!disabled,
   });
-  const inputClassName = classnames(styles.input, className);
-  const labelId = parseInt(Date.now() * Math.random()).toString();
+
+  const inputClassName = classnames(styles.input, className, {
+    [styles.space]: !!label,
+  });
 
   return (
     <div className={blockClassName}>
-      {label && (
-        <label htmlFor={labelId} className={styles.label}>
-          {label}
-        </label>
-      )}
-      <input
-        id={labelId}
-        className={inputClassName}
-        type={type}
-        name={name}
-        value={value}
-        placeholder={placeholder}
-        onChange={onChange}
-        onClick={onClick}
-        onKeyDown={onKeyDown}
-      />
-      {value && !disabled && onClear && (
-        <Button
-          className={styles.button}
-          icon={{ name: "close", className: styles.icon }}
-          transparent
-          onClick={onClear}
+      <label className={styles.label}>
+        {label}
+        <input
+          className={inputClassName}
+          type={type}
+          name={name}
+          value={value}
+          placeholder={placeholder}
+          onChange={onChange}
+          onClick={onClick}
+          onKeyDown={onKeyDown}
         />
-      )}
-      {disabled && <Icon name="locked" className={styles.icon} />}
+
+        {value && !disabled && onClear && (
+          <Button
+            className={styles.button}
+            icon={{ name: "close", className: styles.icon }}
+            transparent
+            onClick={onClear}
+          />
+        )}
+        {disabled && <Icon name="locked" className={styles.icon} />}
+      </label>
     </div>
   );
 };
