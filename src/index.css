@@ -17,6 +17,20 @@
   --night-shade: rgba(0, 0, 0, 0.3);
 }
 
+:root.light {
+  --background-color-main: var(--color-day-white);
+  --background-color-secondary: var(--color-day-white-blue);
+  --color-main: var(--color-day-black);
+  --color-secondary: var(--color-day-light-blue);
+}
+
+:root.dark {
+  --background-color-main: var(--color-night-white);
+  --background-color-secondary: var(--color-night-white-blue);
+  --color-main: var(--color-night-black);
+  --color-secondary: var(--color-night-light-blue);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -27,8 +41,8 @@ body {
   min-width: 75rem;
   font-family: "Ubuntu", sans-serif;
   font-size: 0.8125rem;
-  color: var(--color-day-black);
-  background-color: var(--color-day-white);
+  color: var(--color-main);
+  background-color: var(--background-color-main);
 }
 
 button,

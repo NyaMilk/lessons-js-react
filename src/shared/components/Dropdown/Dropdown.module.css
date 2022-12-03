@@ -6,7 +6,7 @@
   display: block;
   height: 2rem;
   padding: 0.5rem 2rem 0.5rem 0.5rem;
-  color: var(--color-day-black);
+  color: var(--color-main);
   text-align: start;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -14,7 +14,7 @@
 }
 
 .input::placeholder {
-  color: var(--color-day-light-blue);
+  color: var(--color-secondary);
 }
 
 .icon {
@@ -24,8 +24,8 @@
   width: 2rem;
   height: 2rem;
   padding: 0.5rem;
-  stroke: var(--color-day-light-blue);
-  fill: var(--color-day-light-blue);
+  stroke: var(--color-secondary);
+  fill: var(--color-secondary);
   cursor: pointer;
 }
 

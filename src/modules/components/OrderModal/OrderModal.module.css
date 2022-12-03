@@ -17,7 +17,7 @@
   right: 0;
   width: 30rem;
   height: 100vh;
-  background-color: var(--color-day-white);
+  background-color: var(--background-color-main);
   overflow: hidden;
   box-shadow: 0 0 4rem rgba(0, 0, 0, 0.2), 0 0 1rem rgba(0, 0, 0, 0.15),
     0 0 0.25rem rgba(0, 0, 0, 0.1);
@@ -35,11 +35,11 @@
 .title {
   font-size: 1.625rem;
   font-weight: bold;
-  color: var(--color-day-light-blue);
+  color: var(--color-secondary);
 }
 
 .header .icon {
-  stroke: var(--color-day-white);
+  stroke: var(--background-color-main);
 }
 
 .main {
@@ -105,7 +105,7 @@
   width: 100%;
   padding: 0.75rem 1rem;
   box-sizing: border-box;
-  background-color: var(--color-day-white-blue);
+  background-color: var(--background-color-secondary);
 }
 
 .textWarning {
@@ -119,4 +119,5 @@
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
+  text-align: center;
 }

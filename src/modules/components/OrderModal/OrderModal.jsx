@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { createRef, useCallback, useEffect, useState } from "react";
 import styles from "./OrderModal.module.css";
 import {
   Button,
@@ -129,6 +129,21 @@ export const OrderModal = ({ setShowModal }) => {
     },
   ];
 
+  const ref = createRef();
+
+  useEffect(() => {
+    const onClickOutside = (e) => {
+      if (ref && !ref.current.contains(e.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    if (isShowDropdown) {
+      window.addEventListener("mousedown", onClickOutside);
+    }
+    return () => window.removeEventListener("mousedown", onClickOutside);
+  }, [isShowDropdown, ref]);
+
   return (
     <div className={styles._}>
       {isChangeFormData && (
@@ -195,6 +210,7 @@ export const OrderModal = ({ setShowModal }) => {
             />
 
             <Dropdown
+              ref={ref}
               label="Статус заказа"
               type="single"
               name="statusForm"

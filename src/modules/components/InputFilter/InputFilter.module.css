@@ -5,7 +5,7 @@
   width: 8.875rem;
   height: 2rem;
   border-radius: 0.25rem;
-  background-color: var(--color-day-white);
+  background-color: var(--background-color-main);
   border: 0.0625rem solid var(--color-blue);
   box-sizing: border-box;
 }

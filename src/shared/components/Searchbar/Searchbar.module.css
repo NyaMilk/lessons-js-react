@@ -7,7 +7,7 @@
 }
 
 .input::placeholder {
-  color: var(--color-day-light-blue);
+  color: var(--color-secondary);
 }
 
 .icon {
@@ -20,6 +20,6 @@
   border: none;
   box-sizing: border-box;
   background: none;
-  stroke: var(--color-day-light-blue);
-  fill: var(--color-day-light-blue);
+  stroke: var(--color-blue);
+  fill: var(--color-blue);
 }

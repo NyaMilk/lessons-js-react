@@ -35,18 +35,18 @@
 
 .theme_primary {
   background-color: var(--color-blue);
-  color: var(--color-day-white);
+  color: var(--background-color-main);
 }
 
 .theme_secondary {
   background-color: var(--color-red);
-  color: var(--color-day-white);
+  color: var(--background-color-main);
 }
 
 .theme_primary .icon,
 .theme_secondary .icon {
-  stroke: var(--color-day-white);
-  fill: var(--color-day-white);
+  stroke: var(--background-color-main);
+  fill: var(--background-color-main);
 }
 
 .transparent {
@@ -61,7 +61,7 @@
 
 .disabled {
   background-color: transparent;
-  color: var(--color-day-black);
+  color: var(--color-main);
 }
 
 .disabled .icon {
