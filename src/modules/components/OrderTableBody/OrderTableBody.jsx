@@ -50,8 +50,14 @@ export const OrderTableBody = ({ records = [] }) => {
       )}
       {records.length > 0 &&
         records.map(({ id, date, status, count, amount, name }) => {
-          count = count ? count : "–";
-          amount = amount ? Number(amount).toLocaleString() + " ₽" : "–";
+          const parseCount = count ? count : "–";
+          const parseAmount = amount
+            ? new Intl.NumberFormat("ru-RU", {
+                style: "currency",
+                currency: "RUB",
+                minimumFractionDigits: 0,
+              }).format(amount)
+            : "–";
           const isChecked = selectedRecordsIds.includes(id);
 
           return (
@@ -73,8 +79,10 @@ export const OrderTableBody = ({ records = [] }) => {
               <TableCell className={styles.cell_status}>
                 <OrderStatus status={status} />
               </TableCell>
-              <TableCell className={styles.cell_count}>{count}</TableCell>
-              <TableCell className={styles.cell_amount}>{amount}</TableCell>
+              <TableCell className={styles.cell_count}>{parseCount}</TableCell>
+              <TableCell className={styles.cell_amount}>
+                {parseAmount}
+              </TableCell>
               <TableCell className={styles.cell_name}>{name}</TableCell>
             </TableRow>
           );

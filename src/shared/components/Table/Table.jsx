@@ -5,5 +5,5 @@ import styles from "./Table.module.css";
 export const Table = ({ className, children }) => {
   const tableClassName = classnames(styles._, className);
 
-  return <section className={tableClassName}>{children}</section>;
+  return <div className={tableClassName}>{children}</div>;
 };

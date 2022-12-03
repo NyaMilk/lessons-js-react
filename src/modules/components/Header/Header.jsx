@@ -8,6 +8,11 @@ const THEMES = {
   dark: "dark",
 };
 
+const THEMES_LANG_RU = {
+  light: "Светлая",
+  dark: "Темная",
+};
+
 export const Header = () => {
   const toggleModalRef = useRef();
   const {
@@ -35,13 +40,13 @@ export const Header = () => {
 
   const themeItems = [
     {
-      title: "Светлая",
+      title: THEMES_LANG_RU.light,
       icon: { name: "sun" },
       transparent: currentTheme !== THEMES.light,
       onClick: changeTheme(THEMES.light),
     },
     {
-      title: "Темная",
+      title: THEMES_LANG_RU.dark,
       icon: { name: "moon" },
       transparent: currentTheme !== THEMES.dark,
       onClick: changeTheme(THEMES.dark),
@@ -57,7 +62,7 @@ export const Header = () => {
         transparent
         onClick={toggleModal}
       >
-        Светлая тема
+        {THEMES_LANG_RU[currentTheme]} тема
       </Button>
       {isShowModal && (
         <Switcher ref={modalRef} className={styles.dropdown} items={themeItems}>

@@ -4,7 +4,6 @@
 
 .label {
   display: block;
-  margin-bottom: 0.5rem;
 }
 
 .input {
@@ -20,6 +19,9 @@
 
 .input::placeholder {
   color: var(--color-secondary);
+}
+.space {
+  margin-top: 0.5rem;
 }
 
 .icon {
