@@ -6,6 +6,7 @@ import {
   Checkbox,
 } from "../../../shared/components";
 import {
+  getSelectedRecordsIds,
   getSortColumn,
   getSortDirection,
   SORT_TYPE,
@@ -13,28 +14,45 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   setCurrentPage,
+  setSelectedRecordsIds,
   setSortColumn,
   setSortDirection,
 } from "../../../store/slices/recordSlice";
 
-export const OrderTableHeader = () => {
+export const OrderTableHeader = ({ records = [] }) => {
+  const dispatch = useDispatch();
   const sortColumn = useSelector(getSortColumn);
   const sortDirection = useSelector(getSortDirection);
-  const dispatch = useDispatch();
+  const selectedRecordsIds = useSelector(getSelectedRecordsIds);
+
+  useEffect(() => {
+    dispatch(setCurrentPage(1));
+  }, [sortColumn, sortDirection, dispatch]);
 
   const sortCellHandler = (column) => () => {
     dispatch(setSortColumn(column));
     dispatch(setSortDirection(sortDirection === "asc" ? "desc" : "asc"));
   };
 
-  useEffect(() => {
-    dispatch(setCurrentPage(1));
-  }, [sortColumn, sortDirection, dispatch]);
+  const checkboxChangeHandler = ({ target: { checked } }) => {
+    dispatch(
+      setSelectedRecordsIds(
+        checked
+          ? records.map(({ id }) => id)
+          : records.filter(({ id }) => !selectedRecordsIds.includes(id))
+      )
+    );
+  };
 
   return (
     <TableHeader>
       <TableHeaderCell className={styles.cell_withCheckbox}>
-        <Checkbox />
+        <Checkbox
+          checked={
+            records.length > 0 && selectedRecordsIds.length === records.length
+          }
+          onChange={checkboxChangeHandler}
+        />
       </TableHeaderCell>
       <TableHeaderCell className={styles.cell_number}>#</TableHeaderCell>
       <TableHeaderCell

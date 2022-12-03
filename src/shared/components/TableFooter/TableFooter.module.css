@@ -6,4 +6,5 @@
   padding: 0.5rem 1rem;
   box-sizing: border-box;
   background-color: var(--color-day-white-blue);
+  align-items: center;
 }

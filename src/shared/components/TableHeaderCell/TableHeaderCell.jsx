@@ -12,6 +12,7 @@ export const TableHeaderCell = ({
 }) => {
   const cellClassName = classnames(styles._, className, {
     [styles.sorted]: sorted,
+    [styles.sortable]: !!direction,
   });
 
   const iconClassName = classnames(styles.icon, {

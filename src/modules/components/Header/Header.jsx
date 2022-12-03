@@ -2,33 +2,33 @@ import React, { useEffect, useState } from "react";
 import styles from "./Header.module.css";
 import { Button, Switcher } from "../../../shared/components";
 
-const themeItems = [
-  {
-    title: "Светлая",
-    icon: { name: "sun" },
-    transparent: true,
-  },
-  {
-    title: "Темная",
-    icon: { name: "moon" },
-  },
-];
-
 export const Header = () => {
-  const [isShow, setShow] = useState(false);
+  const [isShowModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const onClickOutside = () => setShow(false);
-    if (isShow) {
+    const onClickOutside = () => setShowModal(false);
+    if (isShowModal) {
       window.addEventListener("click", onClickOutside);
     }
     return () => window.removeEventListener("click", onClickOutside);
-  }, [isShow]);
+  }, [isShowModal]);
 
   const toggleModal = (e) => {
     e.stopPropagation();
-    setShow(!isShow);
+    setShowModal(!isShowModal);
   };
+
+  const themeItems = [
+    {
+      title: "Светлая",
+      icon: { name: "sun" },
+      transparent: true,
+    },
+    {
+      title: "Темная",
+      icon: { name: "moon" },
+    },
+  ];
 
   return (
     <header className={styles._}>
@@ -36,7 +36,7 @@ export const Header = () => {
       <Button icon={{ name: "sun" }} transparent onClick={toggleModal}>
         Светлая тема
       </Button>
-      {isShow && (
+      {isShowModal && (
         <Switcher className={styles.dropdown} items={themeItems}>
           Выберите тему
         </Switcher>

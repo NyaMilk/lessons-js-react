@@ -4,7 +4,6 @@
 
 .input {
   display: block;
-  width: 12rem;
   height: 2rem;
   padding: 0.5rem 2rem 0.5rem 0.5rem;
   color: var(--color-day-black);

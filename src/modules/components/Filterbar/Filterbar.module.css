@@ -24,11 +24,6 @@
   position: relative;
 }
 
-/* .filter-dropdown__title {
-    display: block;
-    margin-bottom: 0.5rem;
+.dropdown {
+  width: 12rem;
 }
-
-.filter-dropdown__input {
-    width: 12rem;
-} */

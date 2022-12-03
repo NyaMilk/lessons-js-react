@@ -19,3 +19,9 @@
   padding: 0.25rem 0.5rem;
   color: var(--color-blue);
 }
+
+.modal {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 2.5rem;
+}

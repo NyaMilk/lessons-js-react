@@ -1,4 +1,4 @@
-import recordsMock from "../../assets/mock/orders2.json";
+import mockOrderRecords from "../../assets/mock/orders2.json";
 import { chunk } from "lodash/array";
 import {
   checkDateRange,
@@ -29,6 +29,9 @@ export const getCurrentPage = (state) => state.records.currentPage;
 export const getPageCount = (state) => state.records.pageCount;
 export const getSortDirection = (state) => state.records.sortDirection;
 export const getSortColumn = (state) => state.records.sortColumn;
+export const getSelectedRecordsIds = (state) =>
+  state.records.selectedRecordsIds;
+export const getRecord = (state) => state.form.record;
 
 const getFilteredRecords = ({ filters }, records) => {
   const checkSearch = (id, name) => {
@@ -79,15 +82,20 @@ const sortRecords = (orders, sortDirection, sortColumn) => {
 };
 
 export const getRecordsWithFilters = (state) => {
-  const filteredRecord = getFilteredRecords(state, recordsMock);
+  const records = getRecords(state);
+  const filteredRecord = getFilteredRecords(state, records);
   const sortDirection = getSortDirection(state);
   const sortColumn = getSortColumn(state);
   const sortedRecords = sortRecords(filteredRecord, sortDirection, sortColumn);
-  const records = chunk(sortedRecords, RECORDS_ON_PAGE);
+  const chunkRecords = chunk(sortedRecords, RECORDS_ON_PAGE);
   const currentPage = getCurrentPage(state);
 
   return {
-    records: records[currentPage - 1],
-    pageCount: records.length,
+    records: chunkRecords[currentPage - 1],
+    pageCount: chunkRecords.length,
   };
+};
+
+export const loadRecords = () => {
+  return mockOrderRecords;
 };

@@ -13,6 +13,7 @@
 
 .cell_status {
   min-width: 11rem;
+  pointer-events: none;
 }
 
 .cell_count {

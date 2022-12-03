@@ -9,8 +9,14 @@
   color: var(--color-blue);
 }
 
-.modal {
+.deleteModal {
   position: absolute;
-  top: -6.8rem;
   left: 19.25rem;
+  bottom: 2.5rem;
+}
+
+.changeStatusModal {
+  position: absolute;
+  left: 9.5rem;
+  bottom: 2.5rem;
 }
