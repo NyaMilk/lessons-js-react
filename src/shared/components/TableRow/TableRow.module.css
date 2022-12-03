@@ -1,5 +1,6 @@
 ._ {
   display: flex;
+  height: 2.5rem;
   border-bottom: 1px solid var(--color-day-white-blue);
   height: 2.5rem;
 }
