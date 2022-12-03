@@ -1,0 +1,25 @@
+._ {
+  position: relative;
+}
+
+.input {
+  padding: 0.5rem 2rem;
+}
+
+.input::placeholder {
+  color: var(--color-day-light-blue);
+}
+
+.icon {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+  border: none;
+  box-sizing: border-box;
+  background: none;
+  stroke: var(--color-day-light-blue);
+  fill: var(--color-day-light-blue);
+}

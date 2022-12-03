@@ -1,0 +1,37 @@
+:root {
+  --color-day-white: #ffffff;
+  --color-day-black: #000000;
+  --color-day-light-blue: #bad8f5;
+  --color-day-white-blue: #ebf0f5;
+  --color-night-white: #2b2d33;
+  --color-night-black: #bcc4cc;
+  --color-night-light-blue: #454e52;
+  --color-night-white-blue: #171b1f;
+  --color-blue: #459df5;
+  --color-red: #f53152;
+  --color-orange: #ff8c56;
+  --color-green: #0fb864;
+  --color-purple: #8055ff;
+  --day-shade: rgba(0, 0, 0, 0.15);
+  --night-shade: rgba(0, 0, 0, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 0.8125rem;
+  color: var(--color-day-black);
+  background-color: var(--color-day-white);
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}

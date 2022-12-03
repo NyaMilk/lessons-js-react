@@ -1,0 +1,37 @@
+._ {
+  position: relative;
+}
+
+.input {
+  display: block;
+  width: 12rem;
+  height: 2rem;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  color: var(--color-day-black);
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.input::placeholder {
+  color: var(--color-day-light-blue);
+}
+
+.icon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+  stroke: var(--color-day-light-blue);
+  fill: var(--color-day-light-blue);
+  cursor: pointer;
+}
+
+.modal {
+  position: absolute;
+  right: 0;
+  margin-top: 0.25rem;
+}

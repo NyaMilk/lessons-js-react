@@ -1,0 +1,14 @@
+._ {
+  position: relative;
+  height: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.dropdown {
+  position: absolute;
+  top: 2.25rem;
+  right: 0;
+}

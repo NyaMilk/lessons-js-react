@@ -1,0 +1,84 @@
+._ {
+  display: flex;
+  justify-content: center;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+._:hover {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease-out;
+}
+
+.size_middle {
+  min-width: 2rem;
+  min-height: 2rem;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.size_small {
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.size_middle.icon_only {
+  padding: 0.5rem;
+}
+
+.size_small.icon_only {
+  padding: 0.25rem;
+}
+
+.theme_primary {
+  background-color: var(--color-blue);
+  color: var(--color-day-white);
+}
+
+.theme_secondary {
+  background-color: var(--color-red);
+  color: var(--color-day-white);
+}
+
+.theme_primary .icon,
+.theme_secondary .icon {
+  stroke: var(--color-day-white);
+  fill: var(--color-day-white);
+}
+
+.transparent {
+  background-color: transparent;
+  color: var(--color-blue);
+}
+
+.transparent .icon {
+  stroke: var(--color-blue);
+  fill: var(--color-blue);
+}
+
+.disabled {
+  background-color: transparent;
+  color: var(--color-day-black);
+}
+
+.disabled .icon {
+  stroke: var(--color-day-black);
+  fill: var(--color-day-black);
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.opacity {
+  opacity: 0;
+}
+
+.opacity:hover {
+  opacity: 0;
+  cursor: default;
+}
