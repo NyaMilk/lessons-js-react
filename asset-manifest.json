@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/lessons-js-react/static/css/main.6f9cfe46.css",
+    "main.js": "/lessons-js-react/static/js/main.760d4916.js",
+    "index.html": "/lessons-js-react/index.html",
+    "static/media/sun.svg": "/lessons-js-react/static/media/sun.7b86cb82aee73e3acf202ad1272898e1.svg",
+    "static/media/locked.svg": "/lessons-js-react/static/media/locked.6566f34699688e5f6c218dfa0363c8e7.svg",
+    "static/media/bin.svg": "/lessons-js-react/static/media/bin.577b20a3a40b9a3a2e12dd6d7d293632.svg",
+    "static/media/refresh.svg": "/lessons-js-react/static/media/refresh.72832d0bb18c7ef0bc8ac9756488a29d.svg",
+    "static/media/search.svg": "/lessons-js-react/static/media/search.b2fbbb90a0bdfeb74959bf97985930bb.svg",
+    "static/media/moon.svg": "/lessons-js-react/static/media/moon.c2995275aba02ebca3fe48c150fc3ad4.svg",
+    "static/media/pencil.svg": "/lessons-js-react/static/media/pencil.af371fc8bcf8aec04243080918352b19.svg",
+    "static/media/abort.svg": "/lessons-js-react/static/media/abort.15af8367f03d06311dace2ed2ae69c58.svg",
+    "static/media/checkmark.svg": "/lessons-js-react/static/media/checkmark.5e4b667c20b188fab41aac4f90e4179c.svg",
+    "static/media/filter.svg": "/lessons-js-react/static/media/filter.f747157ca06d0086c1e6ee9346324f39.svg",
+    "static/media/x-medium.svg": "/lessons-js-react/static/media/x-medium.9d22c63a11fc8e326f6ee3e5c05b3b12.svg",
+    "static/media/v_arrow.svg": "/lessons-js-react/static/media/v_arrow.f78b38d2ae0689b51c27390c12d3b835.svg",
+    "static/media/x-large.svg": "/lessons-js-react/static/media/x-large.b27a30ae8b9f868db70a080a45710558.svg",
+    "static/media/dot.svg": "/lessons-js-react/static/media/dot.53621c551436b48bf9f5b46885104715.svg",
+    "main.6f9cfe46.css.map": "/lessons-js-react/static/css/main.6f9cfe46.css.map",
+    "main.760d4916.js.map": "/lessons-js-react/static/js/main.760d4916.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6f9cfe46.css",
+    "static/js/main.760d4916.js"
+  ]
+}
